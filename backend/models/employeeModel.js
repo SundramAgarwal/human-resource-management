@@ -1,39 +1,84 @@
 const mongoose = require("mongoose");
 
 const employeeSchema = mongoose.Schema({
-    user: {
+    admin: {
         type : mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "Admin",
     },
-    name: {
+    first_name: {
         type: String,
-        required: [true,"Please add a name"],
+        required: [true,"Please add the first name"],
         trim: true,
     },
-    sku: {
+    last_name: {
         type: String,
-        default: "SKU",
+        required: [true,"Please add the last name"],
         trim: true,
     },
-    category: {
+    employee_code: {
         type: String,
-        required: [true, "Please add a category"],
+        default: "EMPLOYEE_CODE",
         trim: true,
     },
-    quantity: {
+    department: {
         type: String,
-        required: [true, "Please add a quantity"],
+        required: [true, "Please add the department"],
         trim: true,
     },
-    price: {
+    designation: {
         type: String,
-        required: [true, "Please add a price"],
+        required: [true, "Please add the designation"],
         trim: true,
     },
-    description: {
+    role: {
         type: String,
-        required: [true, "Please add a description"],
+        required: [true, "Please add the role"],
+        trim: true,
+    },
+    class_assigned: {
+        type: String,
+        required: [true],
+        trim: true,
+    },
+    gender: {
+        type: String,
+        required: [true, "Please specify gender"],
+        trim: true,
+    },
+    blood_group: {
+        type: String,
+        required: [true, "Please add the blood_group"],
+        trim: true,
+    },
+    contact_number: {
+        type: String,
+        required: [true],
+        default: "+91"
+    },
+    date_of_birth: {
+        type: Date,
+        required: [true],
+        trim: true,
+    },
+    date_of_joining: {
+        type: Date,
+        required: [true],
+        trim: true,
+    },
+    email: {
+        type: String,
+        required: [true, "Please add a email!"],
+        unique: true,
+        trim: true,
+        match: [
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            "Please enter a valid email!."
+        ]
+    },
+    address: {
+        type: String,
+        required: [true, "Please add the address"],
         trim: true,
     },
     image: {

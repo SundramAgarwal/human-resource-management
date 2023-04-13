@@ -3,12 +3,40 @@ const Employee = require("../models/employeeModel");
 const { fileSizeFormatter } = require("../utils/fileUpload");
 const cloudinary = require("cloudinary").v2;
 
-//create employee
+//create employee 
 const createEmployee = asyncHandler(async(req,res)=> {
-    const {name,sku,category,quantity,price,description} = req.body
+    const {
+        first_name,
+        last_name,
+        employee_code,
+        department,
+        designation,
+        role,
+        class_assigned,
+        gender,
+        blood_group,
+        contact_number,
+        date_of_birth,
+        date_of_joining,
+        email,
+        address,
+    } = req.body
 
     //validation of request
-    if (!name || !category || !quantity || !price || !description) {
+    if (
+        !first_name ||
+        !last_name || 
+        !department || 
+        !designation ||
+        !role ||
+        !gender ||
+        !blood_group ||
+        !contact_number ||
+        !date_of_birth ||
+        !date_of_joining ||
+        !email ||
+        !address
+        ) {
         res.status(400)
         throw new Error("Please fill in all fields!")
     }
@@ -39,13 +67,21 @@ const createEmployee = asyncHandler(async(req,res)=> {
 
     // create employees
     const employee = await Employee.create({
-        user: req.user.id,   
-        name,
-        sku,
-        category,
-        quantity,
-        price,
-        description,
+        admin: req.admin.id,   
+        first_name,
+        last_name,
+        employee_code,
+        department,
+        designation,
+        role,
+        class_assigned,
+        gender,
+        blood_group,
+        contact_number,
+        date_of_birth,
+        date_of_joining,
+        email,
+        address,
         image: fileData
     });
 
@@ -55,7 +91,7 @@ const createEmployee = asyncHandler(async(req,res)=> {
 
 //get all employee
 const getEmployees = asyncHandler(async(req,res)=> {
-    const employees = await Employee.find({user: req.user.id}).sort("-createdAt")
+    const employees = await Employee.find({admin: req.admin.id}).sort("-createdAt")
     res.status(200).json(employees)
 })
 
@@ -66,12 +102,12 @@ const getEmployee = asyncHandler(async(req,res)=> {
     //if employee doesnot exist
     if(!employee) {
         res.status(404)
-        throw new Error("Prouct not found!")
+        throw new Error("Employee not found!")
     }
-    //match employee to its user
-    if (employee.user.toString() != req.user.id) {
+    //match employee to its admin
+    if (employee.admin.toString() != req.admin.id) {
         res.status(401)
-        throw new Error("User not authorized!")
+        throw new Error("admin not authorized!")
     }
     res.status(200).json(employee);
 })
@@ -82,19 +118,29 @@ const deleteEmployee = asyncHandler(async(req,res)=> {
     //if employee doesnot exist
     if(!employee) {
         res.status(404)
-        throw new Error("Prouct not found!")
+        throw new Error("EMployee not found!")
     }
-    if (employee.user.toString() != req.user.id) {
+    if (employee.admin.toString() != req.admin.id) {
         res.status(401)
-        throw new Error("User not authorized!")
+        throw new Error("admin not authorized!")
     }
     await employee.remove();
-    res.status(200).json({message: "Employee deleted sucessfully!"});
+    res.status(200).json({message: "Employee remove sucessfully!"});
 })
 
 //update a Employee details
 const updateEmployee = asyncHandler(async(req,res)=> {
-    const {name,category,quantity,price,description} = req.body
+    const {
+        first_name,
+        last_name,
+        department,
+        designation,
+        role,
+        class_assigned,
+        contact_number,
+        email,
+        address,
+    } = req.body
 
     const employee = await Employee.findById(req.params.id)
 
@@ -104,10 +150,10 @@ const updateEmployee = asyncHandler(async(req,res)=> {
         throw new Error("Employee not found!")
     }
 
-    //match employee to its user
-    if (employee.user.toString() != req.user.id) {
+    //match employee to its admin
+    if (employee.admin.toString() != req.admin.id) {
         res.status(401)
-        throw new Error("User not authorized!")
+        throw new Error("admin not authorized!")
     }
 
     // handle the image upload
@@ -138,11 +184,15 @@ const updateEmployee = asyncHandler(async(req,res)=> {
     const updatedEmployee = await Employee.findByIdAndUpdate(
         {_id: req.params.id},
         {
-            name,
-            category,
-            quantity,
-            price,
-            description,
+            first_name,
+            last_name,
+            department,
+            designation,
+            role,
+            class_assigned,
+            contact_number,
+            email,
+            address,
             image: Object.keys(fileData).length === 0 ?  employee?.image : fileData,
         },
         {
