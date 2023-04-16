@@ -1,22 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./EmployeeSummary.scss"
-import { AiFillDollarCircle } from 'react-icons/ai'
-import { BsCart4, BsCartX } from 'react-icons/bs'
+import { AiOutlineFile } from 'react-icons/ai'
+import { GrProjects} from 'react-icons/gr'
+import { IoIosMan } from 'react-icons/io'
 import { BiCategory } from 'react-icons/bi'
 import InfoBox from '../../infoBox/InfoBox'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { CALC_OUTOFSTOCK,
-//          CALC_STORE_VALUE,
-//          CALC_CATEGORY,
-//          selectCategory,
-//          selectOutOfStock,
-//          selectTotalStoreValue 
-//        } from '../../../redux/features/product/productSlice';
+import { useDispatch, useSelector } from 'react-redux'
+import { CALC_DEPARTMENT,
+         selectDepartment,
+       } from '../../../redux/features/employee/employeeSlice';
+
 //Icons 
-const earningIcon = <AiFillDollarCircle size = {40} color = '#fff'/>
-const employeeIcon= <BsCart4 size = {40} color = '#fff'/>
+const departmentIcon = <AiOutlineFile size = {40} color = '#fff' />
+const employeeIcon= <IoIosMan size = {40} color = 'white'/>
 const categoryIcon= <BiCategory size = {40} color = '#fff'/>
-const outOfStockIcon= <BsCartX size = {40} color = '#fff'/>
+const projectIcon= <GrProjects size = {30} color = 'white'/>
 
 
 //Format Amount
@@ -25,28 +23,22 @@ export const formatNumbers = (x) => {
 }
 
 const EmployeeSummary = ({employees}) => {
-  // const dispatch = useDispatch();
-  // const totalStoreValue = useSelector(selectTotalStoreValue)
-  // const outOfStock = useSelector(selectOutOfStock)
-  // const categories = useSelector(selectCategory)
+  const dispatch = useDispatch();
+  const department = useSelector(selectDepartment)
 
-  // useEffect(() => {
-  //   dispatch(CALC_STORE_VALUE(products));
-  //   dispatch(CALC_OUTOFSTOCK(products));
-  //   dispatch(CALC_CATEGORY(products))
-  // },[dispatch,employees])
+  useEffect(() => {
+    dispatch(CALC_DEPARTMENT(employees))
+  },[dispatch,employees])
 
   return (
     <div className='product-summary'>
       <h2>Employee Stats</h2>
       <div className='info-summary'>
-        <InfoBox icon = {employeeIcon} title = {'Total Products'} count = {employees.length} bgColor = 'card1'/>
-        <InfoBox icon = {earningIcon} title = {'Total Store Value'} count = {8} bgColor = 'card2'/>
-        <InfoBox icon = {outOfStockIcon } title = {'Out of stock'} count = {9} bgColor = 'card3'/>
-        <InfoBox icon = {categoryIcon} title = {'All categories'} count = {9} bgColor = 'card4'/>
-        {/* <InfoBox icon = {earningIcon} title = {'Total Store Value'} count = {`$${formatNumbers(totalStoreValue.toFixed(2))}`} bgColor = 'card2'/>
-        <InfoBox icon = {outOfStockIcon } title = {'Out of stock'} count = {outOfStock} bgColor = 'card3'/>
-        <InfoBox icon = {categoryIcon} title = {'All categories'} count = {categories.length} bgColor = 'card4'/> */}
+        <InfoBox icon = {employeeIcon} title = {'Total Employees'} count = {employees.length} bgColor = 'card1'/>
+        <InfoBox icon = {departmentIcon} title = {'Total Departments'} count = {department.length} bgColor = 'card2'/>
+        <InfoBox icon = {projectIcon} title = {'Running Projects'} count = {5} bgColor = 'card3'/>
+        <InfoBox icon = {categoryIcon} title = {'Upcoming Projects'} count = {9} bgColor = 'card4'/>
+        {/* <InfoBox icon = {earningIcon} title = {'Total Store Value'} count = {`$${formatNumbers(totalStoreValue.toFixed(2))}`} bgColor = 'card2'/> */}
 
       </div>
     </div>

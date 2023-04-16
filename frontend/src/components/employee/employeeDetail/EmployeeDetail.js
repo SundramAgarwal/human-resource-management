@@ -7,7 +7,7 @@ import { getEmployee } from "../../../redux/features/employee/employeeSlice";
 import Card from "../../card/Card";
 import { SpinnerImg } from "../../loader/Loader";
 import "./EmployeeDetail.scss";
-import DOMPurify from "dompurify";
+// import DOMPurify from "dompurify";
 
 const EmployeeDetail = () => {
   useRedirectLoggedOutAdmin("/login");
@@ -92,14 +92,17 @@ const EmployeeDetail = () => {
               <b>&rarr; Date of joining: </b> {employee.date_of_birth}
             </p>
             <p>
-              <b>&rarr; Total Working hours per day : </b> {employee.class_assigned * 1.2} {"Hours"}
+              <b>&rarr; Total Working hours per day : </b> {Math.ceil(employee.class_assigned * (2/3) * 1.2)} {"Hours"}
             </p>
             <hr />
-            <div
+            <p>
+              <b>&rarr; Address: </b> {employee.address}
+            </p>
+            {/* <div
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(employee.address),
               }}
-            ></div>
+            ></div>{employee.address} */}
             <hr />
             <code className="--color-dark">
               Created on: {employee.createdAt.toLocaleString("en-US")}

@@ -1,5 +1,5 @@
 import React from "react";
-import ReactQuill from "react-quill";
+// import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Card from "../../card/Card";
 
@@ -7,10 +7,10 @@ import "./EmployeeForm.scss";
 
 const EmployeeForm = ({ 
   employee,
-  employeeImage,
+  employeeImage,  
   imagePreview, 
-  address,
-  setAddress,
+  // address,
+  // setAddress,
   handleInputChange,
   handleImageChange,
   saveEmployee,
@@ -38,7 +38,7 @@ const EmployeeForm = ({
               <p>No image set for this employee.</p>
             )}
           </Card>
-          <label>Employee First Name:</label>
+          <label>First Name:</label>
           <input
             type="text"
             placeholder="Employee First name"
@@ -47,25 +47,61 @@ const EmployeeForm = ({
             onChange={handleInputChange}
           />
 
-          <label>Employee_ID:</label>
+          <label>Last Name:</label>
           <input
             type="text"
-            placeholder="Employee Category"
-            name="employee_code"
-            value={employee?.employee_code}
+            placeholder="Employee last name"
+            name="last_name"
+            value={employee?.last_name}
             onChange={handleInputChange}
           />
 
-          <label>Employee role:</label>
+          <label>Email:</label>
+          <input
+            type="email"
+            placeholder="Employee gmail Address"
+            name="email"
+            value={employee?.email}
+            onChange={handleInputChange}
+          />
+
+          <label>Department:</label>
           <input
             type="text"
-            placeholder="Employee Price"
+            placeholder="Department"
+            name="department"
+            value={employee?.department}
+            onChange={handleInputChange}
+          />
+
+          <label>Designation:</label>
+          <input
+            type="text"
+            placeholder="Designation"
+            name="designation"
+            value={employee?.designation}
+            onChange={handleInputChange}
+          />
+
+          <label>Classes Assigned:</label>
+          <input
+            type="number"
+            name="class_assigned"
+            placeholder="Classes"
+            value={employee?.class_assigned}
+            onChange={handleInputChange}
+          />
+
+          <label>Role:</label>
+          <input
+            type="text"
+            placeholder="Employee Role"
             name="role"
             value={employee?.role}
             onChange={handleInputChange}
           />
 
-          <label>Employee Gender:</label>
+          <label>Gender:</label>
           <input
             type="text"
             placeholder="Employee Gender"
@@ -74,14 +110,54 @@ const EmployeeForm = ({
             onChange={handleInputChange}
           />
 
-          <label>Employee Address:</label>
-          <ReactQuill
+          <label>Blood Group:</label>
+          <input
+            type="text"
+            placeholder="Blood Group"
+            name="blood_group"
+            value={employee?.blood_group}
+            onChange={handleInputChange}
+          />
+
+          <label>Contact:</label>
+          <input
+            type="text"
+            placeholder="Contact Number"
+            name="contact_number"
+            value={employee?.contact_number}
+            onChange={handleInputChange}
+          />
+
+          <label>Date Of Birth:</label>
+          <input
+            type="date"
+            name="date_of_birth"
+            value={employee?.date_of_birth}
+            onChange={handleInputChange}
+          />
+
+          <label>Date Of Joining:</label>
+          <input
+            type="date"
+            name="date_of_joining"
+            value={employee?.date_of_joining}
+            onChange={handleInputChange}
+          />
+
+          <label>Address:</label>
+          <textarea 
+            rows = '10' 
+            cols = '30' 
+            name = 'address' 
+            value = {employee?.address} 
+            onChange={handleInputChange} ></textarea>
+          {/* <ReactQuill
             theme="snow"
             value={address}
             onChange={setAddress}
             modules={EmployeeForm.modules}
             formats={EmployeeForm.formats}
-          />
+          /> */}
 
           <div className="--my">
             <button type="submit" className="--btn --btn-primary">
@@ -94,41 +170,41 @@ const EmployeeForm = ({
   );
 };
 
-EmployeeForm.modules = {
-  toolbar: [
-    [{ header: "1" }, { header: "2" }, { font: [] }],
-    [{ size: [] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [{ align: [] }],
-    [{ color: [] }, { background: [] }],
-    [
-      { list: "ordered" },
-      { list: "bullet" },
-      { indent: "-1" },
-      { indent: "+1" },
-    ],
-    ["clean"],
-  ],
-};
-EmployeeForm.formats = [
-  "header",
-  "font",
-  "size",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "blockquote",
-  "color",
-  "background",
-  "list",
-  "bullet",
-  "indent",
-  "link",
-  "video",
-  "image",
-  "code-block",
-  "align",
-];
+// EmployeeForm.modules = {
+//   toolbar: [
+//     [{ header: "1" }, { header: "2" }, { font: [] }],
+//     [{ size: [] }],
+//     ["bold", "italic", "underline", "strike", "blockquote"],
+//     [{ align: [] }],
+//     [{ color: [] }, { background: [] }],
+//     [
+//       { list: "ordered" },
+//       { list: "bullet" },
+//       { indent: "-1" },
+//       { indent: "+1" },
+//     ],
+//     ["clean"],
+//   ],
+// };
+// EmployeeForm.formats = [
+//   "header",
+//   "font",
+//   "size",
+//   "bold",
+//   "italic",
+//   "underline",
+//   "strike",
+//   "blockquote",
+//   "color",
+//   "background",
+//   "list",
+//   "bullet",
+//   "indent",
+//   "link",
+//   "video",
+//   "image",
+//   "code-block",
+//   "align",
+// ];
 
 export default EmployeeForm;

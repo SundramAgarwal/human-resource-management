@@ -57,12 +57,12 @@ const employeeSchema = mongoose.Schema({
         default: "+91"
     },
     date_of_birth: {
-        type: Date,
+        type: String,
         required: [true],
         trim: true,
     },
     date_of_joining: {
-        type: Date,
+        type: String,
         required: [true],
         trim: true,
     },

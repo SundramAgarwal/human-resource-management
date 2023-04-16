@@ -10,9 +10,18 @@ import {
 
 const initialState = {
   first_name: "",
-  employee_code: "",
+  last_name: "",
+  email: "",
+  department: "",
+  designation: "",
+  class_assigned: "",
   role: "",
   gender: "",
+  blood_group: "",
+  contact_number: "",
+  date_of_birth: "",
+  date_of_joining: "",
+  address: ""
 };
 
 const AddEmployee = () => {
@@ -21,14 +30,28 @@ const AddEmployee = () => {
   const [employee, setEmployee] = useState(initialState);
   const [employeeImage, setEmployeeImage] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
-  const [address, setAddress] = useState("");
+  // const [address, setAddress] = useState("");
 
   const isLoading = useSelector(selectIsLoading);
 
-  const { first_name, role, gender } = employee;
+  const { 
+    first_name,
+    last_name,
+    email,
+    department,
+    designation,
+    class_assigned, 
+    role, 
+    gender,
+    blood_group,
+    contact_number,
+    date_of_birth,
+    date_of_joining,
+    address
+   } = employee;
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target; 
     setEmployee({ ...employee, [name]: value });
   };
 
@@ -37,8 +60,8 @@ const AddEmployee = () => {
     setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
 
-  const generateEmployee_code = (category) => {
-    const letter = category.slice(0, 3).toUpperCase();
+  const generateEmployee_code = (department) => {
+    const letter = department.slice(0, 3).toUpperCase();
     const number = Date.now();
     const employee_code = letter + "-" + number;
     return employee_code;
@@ -47,13 +70,22 @@ const AddEmployee = () => {
   const saveEmployee = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("first_name", first_name);
-    formData.append("employee_code", generateEmployee_code(role));
-    formData.append("role", role);
-    // formData.append("quantity", Number(quantity));
-    formData.append("gender", Number(gender));
-    formData.append("address", address);
     formData.append("image", employeeImage);
+    formData.append("first_name", first_name);
+    formData.append("last_name", last_name);
+    formData.append("email", email);
+    formData.append("employee_code", generateEmployee_code(department));
+    formData.append("department", department);
+    formData.append("designation", designation);
+    formData.append("class_assigned", Number(class_assigned));
+    formData.append("role", role);
+    formData.append("gender", gender);
+    formData.append("blood_group", blood_group);
+    formData.append("contact_number", Number(contact_number));
+    formData.append("date_of_birth",date_of_birth)
+    formData.append("date_of_joining",date_of_joining)
+    formData.append("address", address);
+    
 
     console.log(...formData);
 
@@ -70,8 +102,8 @@ const AddEmployee = () => {
         employee={employee}
         employeeImage={employeeImage}
         imagePreview={imagePreview}
-        address={address}
-        setAddress={setAddress}
+        // address={address}
+        // setAddress={setAddress}
         handleInputChange={handleInputChange}
         handleImageChange={handleImageChange}
         saveEmployee={saveEmployee}

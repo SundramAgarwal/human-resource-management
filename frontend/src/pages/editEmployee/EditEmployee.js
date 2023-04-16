@@ -22,7 +22,7 @@ const EditEmployee = () => {
   const [employee, setEmployee] = useState(employeeEdit);
   const [employeeImage, setEmployeeImage] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
-  const [address, setAddress] = useState("");
+  // const [address, setAddress] = useState("");
 
   useEffect(() => {
     dispatch(getEmployee(id));
@@ -35,11 +35,11 @@ const EditEmployee = () => {
       employeeEdit && employeeEdit.image ? `${employeeEdit.image.filePath}` : null
     );
 
-    setAddress(
-      employeeEdit && employeeEdit.address ? employeeEdit.address : ""
-    );
+    // setAddress(
+    //   employeeEdit && employeeEdit.address ? employeeEdit.address : ""
+    // );
   }, [employeeEdit]);
-
+ 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEmployee({ ...employee, [name]: value });
@@ -53,10 +53,16 @@ const EditEmployee = () => {
   const saveEmployee = async (e) => {
     e.preventDefault();
     const formData = new FormData();
+    formData.append("image", employeeImage);
     formData.append("first_name", employee?.first_name);
+    formData.append("last_name", employee?.last_name);
+    formData.append("email", employee?.email);
+    formData.append("department", employee?.department);
+    formData.append("designation", employee?.designation);
+    formData.append("class_assigned", employee?.class_assigned);
     formData.append("role", employee?.role);
-    formData.append("gender", employee?.gender);
-    formData.append("address", address);
+    formData.append("contact_number", employee?.contact_number);
+    formData.append("address", employee?.address);
     if (employeeImage) {
       formData.append("image", employeeImage);
     }
@@ -76,8 +82,8 @@ const EditEmployee = () => {
         employee={employee}
         employeeImage={employeeImage}
         imagePreview={imagePreview}
-        address={address}
-        setAddress={setAddress}
+        // address={address}
+        // setAddress={setAddress}
         handleInputChange={handleInputChange}
         handleImageChange={handleImageChange}
         saveEmployee={saveEmployee}

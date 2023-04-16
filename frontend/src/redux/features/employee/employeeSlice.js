@@ -11,7 +11,7 @@ const initialState = {
   message: "",
   totalStoreValue: 0,
   outOfStock: 0,
-  category: [],
+  department: [],
 };
 
 // Create New Employee
@@ -138,15 +138,15 @@ const employeeSlice = createSlice({
         })
         state.outOfStock = count
       },
-      CALC_CATEGORY(state,action) {
+      CALC_DEPARTMENT(state,action) {
         const employees = action.payload
         const array = []
         employees.map((item) => {
-            const { category } = item;
-            return array.push(category)
+            const { department } = item;
+            return array.push(department)
         });
-        const uniqueCategory = [...new Set(array)]
-        state.category = uniqueCategory
+        const uniqueDepartment = [...new Set(array)]
+        state.department = uniqueDepartment
       }
     },
     extraReducers: (builder) => {
@@ -238,13 +238,13 @@ const employeeSlice = createSlice({
     },
   });
   
-  export const { CALC_STORE_VALUE,CALC_OUTOFSTOCK,CALC_CATEGORY} = employeeSlice.actions;
+  export const { CALC_STORE_VALUE,CALC_OUTOFSTOCK,CALC_DEPARTMENT} = employeeSlice.actions;
   
   export const selectIsLoading = (state) => state.employee.isLoading;
   export const selectEmployee = (state) => state.employee.employee;
   export const selectTotalStoreValue = (state) => state.employee.totalStoreValue;
   export const selectOutOfStock = (state) => state.employee.outOfStock;
-  export const selectCategory = (state) => state.employee.category;
+  export const selectDepartment = (state) => state.employee.department;
   
   export default employeeSlice.reducer;
 

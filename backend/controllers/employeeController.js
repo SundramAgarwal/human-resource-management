@@ -10,7 +10,7 @@ const createEmployee = asyncHandler(async(req,res)=> {
         last_name,
         employee_code,
         department,
-        designation,
+        designation, 
         role,
         class_assigned,
         gender,
@@ -25,7 +25,7 @@ const createEmployee = asyncHandler(async(req,res)=> {
     //validation of request
     if (
         !first_name ||
-        !last_name || 
+        !last_name ||
         !department || 
         !designation ||
         !role ||
@@ -115,17 +115,19 @@ const getEmployee = asyncHandler(async(req,res)=> {
 //delete a employee
 const deleteEmployee = asyncHandler(async(req,res)=> {
     const employee = await Employee.findById(req.params.id)
-    //if employee doesnot exist
+    //if employee does not exist
     if(!employee) {
         res.status(404)
-        throw new Error("EMployee not found!")
+        throw new Error("Employee not found!")
     }
     if (employee.admin.toString() != req.admin.id) {
         res.status(401)
         throw new Error("admin not authorized!")
     }
-    await employee.remove();
-    res.status(200).json({message: "Employee remove sucessfully!"});
+    await Employee.deleteOne({ _id: req.params.id });
+    // console.log(employee.remove);
+    // console.log(await employee.remove());
+    res.status(200).json({message: "Employee remove successfully!"});
 })
 
 //update a Employee details

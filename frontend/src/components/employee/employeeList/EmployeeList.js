@@ -19,7 +19,7 @@ const EmployeeList = ({employees,isLoading}) => {
   const filteredEmployees = useSelector(selectFilteredEmployees)
   const dispatch = useDispatch()
 
-  const shortenText = (text, n) => {
+  const shortenText = (text, n) => { 
     if (text.length > n) {
       const shortenedText = text.substring(0, n).concat("...")
       return shortenedText
@@ -111,7 +111,7 @@ useEffect(() => {
                     return (
                       <tr key = {_id}>
                         <td>{index + 1}</td>
-                        <td>{shortenText(first_name, 16)}</td>
+                        <td>{shortenText(first_name, 10)}</td>
                         <td>{department}</td>
                         <td>{role}</td>
                         <td>{gender}</td>

@@ -13,7 +13,7 @@ const Contact = () => {
 
     const data = {
         subject,
-        message,
+        message, 
     };
 
     const sendEmail = async (e) => {
