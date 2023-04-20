@@ -13,9 +13,9 @@ const Home = () => {
             </div>
             <ul className='home-links'>
             <ShowOnLogout>
-                <li>
+                {/* <li>
                     <Link to='/register'>Register</Link>
-                </li>
+                </li> */}
                 <li>
                     <button className='--btn --btn-primary'>
                         <Link to='/login'>Login</Link>
@@ -38,11 +38,11 @@ const Home = () => {
             <div className='hero-text'>
                 <h2>HUMAN RESOURCE MANAGEMENT</h2>
                 <p>Human Resource Management is to manage the data of University Staff in real time and integrate to make it easier to manage all staff activities. </p>
-                <div className='hero-buttons'>
+                {/* <div className='hero-buttons'>
                     <button className='--btn --btn-secondary'>
-                        {/* <Link to='/minorDetails'>Minor Details of Employees.</Link> */}
+                        <Link to='/minorDetails'>Minor Details of Employees.</Link>
                     </button>
-                </div>
+                </div> */}
                 <div className='--flex-start'>
                     <NumberText num = "0" text="Brand Owners" />
                     <NumberText num = "3" text="Active Users" />

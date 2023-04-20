@@ -1,19 +1,16 @@
 import React from "react";
 import Card from "../../card/Card";
-// import Select from 'react-select';
 
 import "./EmployeeForm.scss";
 
-
-const EmployeeForm = ({ 
+const EmployeeForm2 = ({ 
   employee,
   employeeImage,  
   imagePreview, 
   handleInputChange,
   handleImageChange,
   saveEmployee,
-}) => {
-
+}) => { 
   return (
     <div className="add-product">
       <Card cardClass={"card"}>
@@ -44,6 +41,7 @@ const EmployeeForm = ({
             name="first_name"
             value={employee?.first_name}
             onChange={handleInputChange}
+            disabled
           />
 
           <label>Last Name:</label>
@@ -53,6 +51,7 @@ const EmployeeForm = ({
             name="last_name"
             value={employee?.last_name}
             onChange={handleInputChange}
+            disabled
           />
 
           <label>Email:</label>
@@ -62,6 +61,7 @@ const EmployeeForm = ({
             name="email"
             value={employee?.email}
             onChange={handleInputChange}
+            disabled
           />
 
           <label>Department:</label>
@@ -72,14 +72,6 @@ const EmployeeForm = ({
             value={employee?.department}
             onChange={handleInputChange}
           />
-          {/* <Select
-            id="dropdown"
-            placeholder="Department"
-            name="department"
-            value={employee?.selectedOption}
-            onChange={handleChange}
-            options={options}
-          /> */}
 
           <label>Designation:</label>
           <input
@@ -108,22 +100,15 @@ const EmployeeForm = ({
             onChange={handleInputChange}
           />
 
-          <label htmlFor="dropdown">Gender:</label>
+          <label>Gender:</label>
           <input
             type="text"
             placeholder="Employee Gender"
             name="gender"
             value={employee?.gender}
             onChange={handleInputChange}
+            disabled
           />
-          {/* <Select
-            id="dropdown"
-            placeholder="Employee Gender"
-            name="gender"
-            value={employee?.selectedOption}
-            onChange={handleChange}
-            options={options}
-          /> */}
 
           <label>Blood Group:</label>
           <input
@@ -132,6 +117,7 @@ const EmployeeForm = ({
             name="blood_group"
             value={employee?.blood_group}
             onChange={handleInputChange}
+            disabled
           />
 
           <label>Contact:</label>
@@ -149,6 +135,7 @@ const EmployeeForm = ({
             name="date_of_birth"
             value={employee?.date_of_birth}
             onChange={handleInputChange}
+            disabled
           />
 
           <label>Date Of Joining:</label>
@@ -157,6 +144,7 @@ const EmployeeForm = ({
             name="date_of_joining"
             value={employee?.date_of_joining}
             onChange={handleInputChange}
+            disabled
           />
 
           <label>Address:</label>
@@ -179,4 +167,4 @@ const EmployeeForm = ({
   );
 };
 
-export default EmployeeForm;
+export default EmployeeForm2;

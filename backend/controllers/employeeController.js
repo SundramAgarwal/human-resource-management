@@ -166,7 +166,7 @@ const updateEmployee = asyncHandler(async(req,res)=> {
         try {
             uploadedFile = await cloudinary.uploader.upload(req.file.path,
                 {
-                folder: "inventory-ap", 
+                folder: "human-resource-management", 
                 resource_type: "image"
             });
         } catch (error) {

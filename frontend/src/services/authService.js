@@ -62,7 +62,7 @@ export const forgotPassword = async (adminData) => {
     try {
         const response = await axios.post(
             `${BACKEND_URL}/api/admins/forgotpassword`, adminData);
-            toast.success(response.data.message) //video number 127 to understand this line
+            toast.success(response.data.message) 
     } catch (error) {
         const message = (
             error.response && error.response.data && error.response.data.message

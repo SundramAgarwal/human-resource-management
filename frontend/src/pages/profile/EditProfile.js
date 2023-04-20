@@ -59,8 +59,8 @@ const EditProfile = () => {
             ) {
                 const image = new FormData()
                 image.append('file',profileImage)
-                image.append('cloud_name','ds0f5yl4y')
-                image.append('upload_preset','gsxoqyhx')
+                image.append('cloud_name','ds0f5yl4y') 
+                image.append('upload_preset','mcgko7q6')
 
                 //first save image to cloudinary
                 const response = await fetch(

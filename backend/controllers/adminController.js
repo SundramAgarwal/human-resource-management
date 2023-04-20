@@ -207,6 +207,7 @@ const changePassword = asyncHandler(async (req,res) => {
 //forget password
 const forgotPassword = asyncHandler(async (req,res) => {
     const {email} = req.body
+    console.log(req.body)
     const admin = await Admin.findOne({email})
     if(!admin) {
         res.status(404)
@@ -231,7 +232,7 @@ const forgotPassword = asyncHandler(async (req,res) => {
     .createHash("sha256")
     .update(resetToken)
     .digest("hex")
-
+ 
     // save token to DB
     await new Token({
         adminId: admin._id,

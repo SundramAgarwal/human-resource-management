@@ -76,8 +76,8 @@ const Login = () => {
 
               <span className={styles.register}>
                 <Link to = "/">Home</Link> 
-                <p> &nbsp; Don't have an account? &nbsp;</p>
-                <Link to = "/register">Register</Link>
+                {/* <p> &nbsp; Don't have an account? &nbsp;</p>
+                <Link to = "/register">Register</Link> */}
               </span>
           </div>
         </Card>

@@ -30,7 +30,6 @@ const AddEmployee = () => {
   const [employee, setEmployee] = useState(initialState);
   const [employeeImage, setEmployeeImage] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
-  // const [address, setAddress] = useState("");
 
   const isLoading = useSelector(selectIsLoading);
 
@@ -102,8 +101,6 @@ const AddEmployee = () => {
         employee={employee}
         employeeImage={employeeImage}
         imagePreview={imagePreview}
-        // address={address}
-        // setAddress={setAddress}
         handleInputChange={handleInputChange}
         handleImageChange={handleImageChange}
         saveEmployee={saveEmployee}
@@ -113,3 +110,4 @@ const AddEmployee = () => {
 };
 
 export default AddEmployee;
+ 

@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const tokenSchema = mongoose.Schema({
-    userId: {
+    adminId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: "user",
+        ref: "admin",
     },
     token: {
         type: String,

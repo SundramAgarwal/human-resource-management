@@ -8,6 +8,7 @@ import Forgot from "./pages/authentication/Forgot";
 import Login from "./pages/authentication/Login";
 import Register from "./pages/authentication/Register";
 import Dashboard from './pages/dashboard/Dashboard';
+import MarkAttendance from './pages/markAttendance/MarkAttendance';
 import Sidebar from './components/sidebar/Sidebar';
 import Layout from './components/layout/Layout';
 import { ToastContainer } from 'react-toastify';
@@ -105,6 +106,15 @@ function App() {
             <Sidebar>
               <Layout>
                 <Contact />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/mark-attendance" element={
+            <Sidebar>
+              <Layout>
+                <MarkAttendance />
               </Layout>
             </Sidebar>
           }

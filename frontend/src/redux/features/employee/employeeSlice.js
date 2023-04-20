@@ -9,8 +9,8 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: "",
-  totalStoreValue: 0,
-  outOfStock: 0,
+  // totalStoreValue: 0,
+  // outOfStock: 0,
   department: [],
 };
 
@@ -110,34 +110,34 @@ const employeeSlice = createSlice({
     name: "employee",
     initialState,
     reducers: {
-      CALC_STORE_VALUE(state, action) {
-        const employees = action.payload
-        const array = []
-        employees.map((item) => {
-            const {price, quantity} = item
-            const employeeValue = price * quantity
-            return array.push(employeeValue)
-        });
-        const totalValue = array.reduce((a,b) => {
-            return a + b
-        }, 0)
-        state.totalStoreValue = totalValue
-      },
-      CALC_OUTOFSTOCK(state,action) {
-        const employees = action.payload
-        const array = []
-        employees.map((item) => {
-            const { quantity } = item;
-            return array.push(quantity)
-        });
-        let count = 0
-        array.forEach((number) => {
-          if (number === 0 || number === '0') {
-            count += 1
-          }
-        })
-        state.outOfStock = count
-      },
+      // CALC_STORE_VALUE(state, action) {
+      //   const employees = action.payload
+      //   const array = []
+      //   employees.map((item) => {
+      //       const {price, quantity} = item
+      //       const employeeValue = price * quantity
+      //       return array.push(employeeValue)
+      //   });
+      //   const totalValue = array.reduce((a,b) => {
+      //       return a + b
+      //   }, 0)
+      //   state.totalStoreValue = totalValue
+      // },
+      // CALC_OUTOFSTOCK(state,action) {
+      //   const employees = action.payload
+      //   const array = []
+      //   employees.map((item) => {
+      //       const { quantity } = item;
+      //       return array.push(quantity)
+      //   });
+      //   let count = 0
+      //   array.forEach((number) => {
+      //     if (number === 0 || number === '0') {
+      //       count += 1
+      //     }
+      //   })
+      //   state.outOfStock = count
+      // },
       CALC_DEPARTMENT(state,action) {
         const employees = action.payload
         const array = []
@@ -238,12 +238,16 @@ const employeeSlice = createSlice({
     },
   });
   
-  export const { CALC_STORE_VALUE,CALC_OUTOFSTOCK,CALC_DEPARTMENT} = employeeSlice.actions;
+  export const { 
+    // CALC_STORE_VALUE,
+    // CALC_OUTOFSTOCK,
+    CALC_DEPARTMENT
+  } = employeeSlice.actions;
   
   export const selectIsLoading = (state) => state.employee.isLoading;
   export const selectEmployee = (state) => state.employee.employee;
-  export const selectTotalStoreValue = (state) => state.employee.totalStoreValue;
-  export const selectOutOfStock = (state) => state.employee.outOfStock;
+  // export const selectTotalStoreValue = (state) => state.employee.totalStoreValue;
+  // export const selectOutOfStock = (state) => state.employee.outOfStock;
   export const selectDepartment = (state) => state.employee.department;
   
   export default employeeSlice.reducer;

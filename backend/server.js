@@ -7,6 +7,7 @@ const cors = require("cors");
 const adminRoute = require("./routes/adminRoute");
 const employeeRoute = require("./routes/employeeRoute");
 const contactRoute = require("./routes/contactRoute");
+const attendanceRoute = require("./routes/attendanceRoute")
 const errorHandler = require("./middleWare/errorMiddleware");
 const cookieParser = require("cookie-parser")
 const path = require("path");
@@ -29,6 +30,7 @@ app.use("/uploads",express.static(path.join(__dirname,"uploads")));
 app.use("/api/admins", adminRoute); 
 app.use("/api/employees", employeeRoute);
 app.use("/api/contactus",contactRoute);
+app.use("/api/attendence",attendanceRoute)
 
 
 app.get("/", (req,res) => {

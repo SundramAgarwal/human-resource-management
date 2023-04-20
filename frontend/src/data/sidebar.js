@@ -1,6 +1,7 @@
 import React from 'react'
 import {FaTh,FaRegChartBar,FaCommentAlt} from "react-icons/fa";
 import { BiImageAdd } from 'react-icons/bi';
+import { ImUserCheck } from 'react-icons/im';
 const sideBarMenu = [
     {
         title: "Dashboard",
@@ -25,6 +26,11 @@ const sideBarMenu = [
                 path: "/edit-profile",
             },
         ],
+    },
+    {
+        title: "Mark Attendance",
+        icon:   <ImUserCheck/>,
+        path: "/mark-attendance",
     },
     {
         title: "Report Bug",

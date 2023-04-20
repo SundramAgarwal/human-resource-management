@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
-import EmployeeForm from "../../components/employee/employeeForm/EmployeeForm";
+import EmployeeForm2 from "../../components/employee/employeeForm/EmployeeForm2";
 import {
   getEmployee,
   getEmployees,
@@ -22,7 +22,6 @@ const EditEmployee = () => {
   const [employee, setEmployee] = useState(employeeEdit);
   const [employeeImage, setEmployeeImage] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
-  // const [address, setAddress] = useState("");
 
   useEffect(() => {
     dispatch(getEmployee(id));
@@ -35,9 +34,6 @@ const EditEmployee = () => {
       employeeEdit && employeeEdit.image ? `${employeeEdit.image.filePath}` : null
     );
 
-    // setAddress(
-    //   employeeEdit && employeeEdit.address ? employeeEdit.address : ""
-    // );
   }, [employeeEdit]);
  
   const handleInputChange = (e) => {
@@ -49,14 +45,11 @@ const EditEmployee = () => {
     setEmployeeImage(e.target.files[0]);
     setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
-
+ 
   const saveEmployee = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("image", employeeImage);
-    formData.append("first_name", employee?.first_name);
-    formData.append("last_name", employee?.last_name);
-    formData.append("email", employee?.email);
     formData.append("department", employee?.department);
     formData.append("designation", employee?.designation);
     formData.append("class_assigned", employee?.class_assigned);
@@ -78,12 +71,10 @@ const EditEmployee = () => {
     <div>
       {isLoading && <Loader />}
       <h3 className="--mt">Edit Employee</h3>
-      <EmployeeForm
+      <EmployeeForm2
         employee={employee}
         employeeImage={employeeImage}
         imagePreview={imagePreview}
-        // address={address}
-        // setAddress={setAddress}
         handleInputChange={handleInputChange}
         handleImageChange={handleImageChange}
         saveEmployee={saveEmployee}
