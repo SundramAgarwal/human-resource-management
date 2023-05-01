@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import './EmployeeList.scss'
-import { SpinnerImg } from '../../loader/Loader'
-import {FaEdit, FaTrashAlt} from "react-icons/fa"
 import {AiOutlineEye} from "react-icons/ai"
-import Search from '../../search/Search'
 import { useDispatch, useSelector } from 'react-redux'
-import { FILTER_EMPLOYEES, selectFilteredEmployees } from '../../../redux/features/employee/filterSlice'
 import ReactPaginate from 'react-paginate'
-import { confirmAlert } from 'react-confirm-alert'
-import 'react-confirm-alert/src/react-confirm-alert.css'
-import { deleteEmployee, getEmployees } from '../../../redux/features/employee/employeeSlice'
 import { Link } from 'react-router-dom'
+import { SpinnerImg } from '../../components/loader/Loader'
+import { FILTER_EMPLOYEES, selectFilteredEmployees } from '../../redux/features/employee/filterSlice'
+import Search from '../../components/search/Search'
+import { getEmployees } from '../../redux/features/employee/employeeSlice'
+import { selectIsLoggedIn } from '../../redux/features/auth/authSlice'
 
 
-const EmployeeList = ({employees,isLoading}) => {
+const ViewAttendance = () => {
 
   const [search, setSearch] = useState("")
   const filteredEmployees = useSelector(selectFilteredEmployees)
   const dispatch = useDispatch()
+  const isLoggedIn = useSelector(selectIsLoggedIn)
+  const {employees,
+    isLoading,
+    isError,
+    message
+   } = useSelector((state) => state.employee)
 
   const shortenText = (text, n) => { 
     if (text.length > n) {
@@ -27,27 +30,14 @@ const EmployeeList = ({employees,isLoading}) => {
     return text
   };
 
-  const delEmployee = async (id) => {
-      await dispatch(deleteEmployee(id))
-      await dispatch(getEmployees())
-  }
-
-  const confirmDelete = (id) => {
-    confirmAlert({
-      title: 'Delete Employee',
-      message: 'Are you sure you want to delete Employee?',
-      buttons: [
-        {
-          label: 'Delete',
-          onClick: () => delEmployee(id)
-        },
-        {
-          label: 'Cancel',
-          onClick: () => alert('Employee Not Deleted')
-        }
-      ]
-    });
-  }
+  useEffect(() => {
+    if (isLoggedIn === true) {
+      dispatch(getEmployees())
+    }
+    if (isError) {
+      console.log(message)
+    }
+  },[isLoggedIn, isError, message, dispatch])
 
 
   //begin pagination
@@ -75,11 +65,10 @@ useEffect(() => {
 
   return (
     <div className='product-list'>
-      <hr/>
       <div className='table'>
         <div className='--flex-between --flex-dir-column'>
           <span>
-            <h2>Employees</h2>
+            <h1>View Attendance</h1>
           </span>
           <span>
             <Search value={search} onChange={(e) => setSearch(e.target.value)}/>
@@ -97,38 +86,22 @@ useEffect(() => {
                 <tr>
                   <th>s/n</th>
                   <th>Name</th>
-                  <th>Department</th>
-                  <th>Role</th>
-                  <th>Gender</th>
-                  <th>Blood Group</th>
-                  <th>Actions</th>
+                  <th>Attendance</th>
                 </tr>
               </thead>
               <tbody>
                 {
                   currentItems.map((employee, index) => {
-                    const {_id,first_name,last_name,department,role,gender,blood_group} = employee
+                    const {_id,first_name} = employee
                     return (
                       <tr key = {_id}>
                         <td>{index + 1}</td>
-                        <td>{shortenText(first_name + "  " + last_name, 20)}</td>
-                        <td>{department}</td>
-                        <td>{role}</td>
-                        <td>{gender}</td>
-                        <td>{blood_group}</td>
+                        <td>{shortenText(first_name, 10)}</td>
                         <td className='icons'>
                           <span className='test'>
-                            <Link to={`/employee-detail/${_id}`}>
+                            <Link to={`/employee-attendance/${_id}`}>
                               <AiOutlineEye size={25} color={"purple"} />
                             </Link>
-                          </span>
-                          <span>
-                            <Link to={`/edit-employee/${_id}`}>
-                              <FaEdit size={20} color={"green"} />
-                            </Link>
-                          </span>
-                          <span>
-                            <FaTrashAlt size = {18} color = {'red'} onClick={() => confirmDelete(_id)}/>
                           </span>
                         </td>
                       </tr>
@@ -158,4 +131,4 @@ useEffect(() => {
   )
 }
 
-export default EmployeeList
+export default ViewAttendance

@@ -30,7 +30,7 @@ app.use("/uploads",express.static(path.join(__dirname,"uploads")));
 app.use("/api/admins", adminRoute); 
 app.use("/api/employees", employeeRoute);
 app.use("/api/contactus",contactRoute);
-app.use("/api/attendence",attendanceRoute)
+app.use("/api/attendance",attendanceRoute)
 
 
 app.get("/", (req,res) => {

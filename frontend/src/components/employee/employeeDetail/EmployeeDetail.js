@@ -22,9 +22,9 @@ const EmployeeDetail = () => {
 
   const classes = (class_assigned) => {
     if (class_assigned > 7) {
-      return <span className="--color-success">No</span>;
+      return <span className="--color-danger">No</span>;
     }
-    return <span className="--color-danger">Yes</span>;
+    return <span className="--color-success">Yes</span>;
   };
 
   useEffect(() => {
@@ -83,13 +83,13 @@ const EmployeeDetail = () => {
               <b>&rarr; Blood_group : </b> {employee.blood_group}
             </p>
             <p>
-              <b>&rarr; Contact_number : </b> {employee.contact_number}
+              <b>&rarr; Contact_number :</b> {employee.contact_number}
             </p>
             <p>
               <b>&rarr; DOB : </b> {employee.date_of_birth}
             </p>
             <p>
-              <b>&rarr; Date of joining: </b> {employee.date_of_birth}
+              <b>&rarr; Date of joining: </b> {employee.date_of_joining}
             </p>
             <p>
               <b>&rarr; Total Working hours per day : </b> {Math.ceil(employee.class_assigned * (2/3) * 1.2)} {"Hours"}

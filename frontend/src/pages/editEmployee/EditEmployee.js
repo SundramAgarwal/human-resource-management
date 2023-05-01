@@ -54,7 +54,7 @@ const EditEmployee = () => {
     formData.append("designation", employee?.designation);
     formData.append("class_assigned", employee?.class_assigned);
     formData.append("role", employee?.role);
-    formData.append("contact_number", employee?.contact_number);
+    formData.append("contact_number", "+" + 91 + " " + employee?.contact_number);
     formData.append("address", employee?.address);
     if (employeeImage) {
       formData.append("image", employeeImage);

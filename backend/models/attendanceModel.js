@@ -1,4 +1,10 @@
 const mongoose = require('mongoose');
+const today = new Date();
+const date = today.toLocaleDateString("en-US", {
+  day: "numeric",
+  month: "short",
+  year: "numeric"
+});
 
 const attendanceSchema = new mongoose.Schema({
   employeeId: {
@@ -9,7 +15,7 @@ const attendanceSchema = new mongoose.Schema({
   date: {
     type: Date,
     required: true,
-    default: Date.now
+    default: date
   },
   isPresent: {
     type: Boolean,

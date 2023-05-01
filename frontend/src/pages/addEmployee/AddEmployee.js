@@ -80,7 +80,7 @@ const AddEmployee = () => {
     formData.append("role", role);
     formData.append("gender", gender);
     formData.append("blood_group", blood_group);
-    formData.append("contact_number", Number(contact_number));
+    formData.append("contact_number", "+" + 91 + " " + Number(contact_number));
     formData.append("date_of_birth",date_of_birth)
     formData.append("date_of_joining",date_of_joining)
     formData.append("address", address);

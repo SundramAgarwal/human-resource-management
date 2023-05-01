@@ -28,9 +28,18 @@ const sideBarMenu = [
         ],
     },
     {
-        title: "Mark Attendance",
+        title: "Attendance",
         icon:   <ImUserCheck/>,
-        path: "/mark-attendance",
+        childrens: [
+            {
+                title: "Mark Attendance",
+                path: "/mark-attendance",
+            },
+            {
+                title: "View Attendance",
+                path: "/view-attendance",
+            },
+        ],
     },
     {
         title: "Report Bug",

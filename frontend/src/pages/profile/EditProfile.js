@@ -92,7 +92,8 @@ const EditProfile = () => {
 
   return (
     <div className='profile --my2'>
-        {isLoading && <Loader/>}
+    {/* if isLoading is true loader will be active */}
+        {isLoading && <Loader/>} 
         <Card cardClass={"card  --flex-dir-column"}>
                     <span className='profile-photo'>
                         <img src = {admin?.photo} alt = "ProfilePic"/>

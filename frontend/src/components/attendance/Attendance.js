@@ -5,6 +5,12 @@ import { FILTER_EMPLOYEES, selectFilteredEmployees } from "../../redux/features/
 import ReactPaginate from "react-paginate";
 import Search from "../search/Search";
 
+import AttendanceCard from "./AttendanceCard";
+import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom'
+
+
+
 const Attendance = ({
     attendance,
     employees,
@@ -15,6 +21,7 @@ const Attendance = ({
     const [search, setSearch] = useState("")
     const filteredEmployees = useSelector(selectFilteredEmployees)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const today = new Date();
     const date = today.toLocaleDateString("en-US", {
       day: "numeric",
@@ -22,13 +29,20 @@ const Attendance = ({
       year: "numeric"
     });
 
-    const shortenText = (text, n) => { 
-      if (text.length > n) {
-        const shortenedText = text.substring(0, n).concat("...")
-        return shortenedText
-      }
-      return text
-    };
+
+    // // used in AttendanceCard
+    // const shortenText = (text, n) => { 
+    //   if (text.length > n) {
+    //     const shortenedText = text.substring(0, n).concat("...")
+    //     return shortenedText
+    //   }
+    //   return text
+    // };
+
+    const messageOnSubmit = () => {
+      toast.success("Attendnce Marked Successfully!")
+      navigate('/dashboard')
+    }
 
     //begin pagination
     const [currentItems, setCurrentItems] = useState([])
@@ -55,7 +69,6 @@ const Attendance = ({
 
       return (
         <div className='product-list'>
-          <hr/>
           <div className='table'>
             <div className='--flex-between --flex-dir-column'>
               <span>
@@ -69,7 +82,7 @@ const Attendance = ({
     
             {isLoading && <SpinnerImg/>}
     
-            <form onSubmit={saveAttendance}>
+            <form onSubmit = {messageOnSubmit}>
             <div className='table'>
               {!isLoading && employees.length === 0 ? (
                 <p>No employee Found please add a employee</p>
@@ -80,11 +93,10 @@ const Attendance = ({
                       <th>s/n</th>
                       <th>Name</th>
                       <th>Mark Attendance</th>
-                      
                     </tr>
                   </thead>
                   <tbody>
-                    {
+                    {/* {
                       currentItems.map((employee, index) => {
                         const {_id,first_name,last_name} = employee
                         return (
@@ -113,7 +125,18 @@ const Attendance = ({
                           </tr>
                         )
                       })
-                    }
+                    } */}
+
+                 
+                     
+                      {
+
+                        currentItems.map((employee, index) => {
+                        const {_id,first_name} = employee
+                        return <AttendanceCard  _id={_id} first_name={first_name}  index={index}/>
+                        })
+
+                      }
                   </tbody>
                 </table>
               )}

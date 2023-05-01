@@ -46,7 +46,7 @@ const MarkAttendance = () => {
     console.log(...formData)
 
     // await dispatch(createAttendance(formData));
-    navigate("/dashboarn")
+    navigate("/dashboard")
   }
 
   return (

@@ -8,7 +8,8 @@ import Forgot from "./pages/authentication/Forgot";
 import Login from "./pages/authentication/Login";
 import Register from "./pages/authentication/Register";
 import Dashboard from './pages/dashboard/Dashboard';
-import MarkAttendance from './pages/markAttendance/MarkAttendance';
+import MarkAttendance from './pages/Attendance/MarkAttendance';
+import ViewAttendance from './pages/Attendance/ViewAttendance';
 import Sidebar from './components/sidebar/Sidebar';
 import Layout from './components/layout/Layout';
 import { ToastContainer } from 'react-toastify';
@@ -23,6 +24,7 @@ import Profile from './pages/profile/Profile';
 import EditEmployee from './pages/editEmployee/EditEmployee';
 import EditProfile from './pages/profile/EditProfile';
 import Contact from './pages/contact/Contact';
+import EmployeeAttendance from './components/employee/employeeAttendance/EmployeeAttendance';
 
 axios.defaults.withCredentials = true;
 
@@ -115,6 +117,24 @@ function App() {
             <Sidebar>
               <Layout>
                 <MarkAttendance />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/view-attendance" element={
+            <Sidebar>
+              <Layout>
+                <ViewAttendance />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/employee-attendance/:id" element={
+            <Sidebar>
+              <Layout>
+                <EmployeeAttendance />
               </Layout>
             </Sidebar>
           }
