@@ -11,3 +11,7 @@ export const addAttendance = async(data) => {
         console.log("error in adding employing in attendance ", error.message);
     }
 }
+
+export const getAttendance = () => {
+    
+}

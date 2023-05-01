@@ -92,11 +92,11 @@ useEffect(() => {
               <tbody>
                 {
                   currentItems.map((employee, index) => {
-                    const {_id,first_name} = employee
+                    const {_id,first_name,last_name} = employee
                     return (
                       <tr key = {_id}>
                         <td>{index + 1}</td>
-                        <td>{shortenText(first_name, 10)}</td>
+                        <td>{shortenText(first_name + " " + last_name, 20)}</td>
                         <td className='icons'>
                           <span className='test'>
                             <Link to={`/employee-attendance/${_id}`}>

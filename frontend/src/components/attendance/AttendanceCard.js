@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { addAttendance } from '../../services/attendanceService';
 
 
-const AttendanceCard = ({_id, first_name,index }) => {
+const AttendanceCard = ({_id, first_name, last_name, index }) => {
 
   const shortenText = (text, n) => { 
     if (text.length > n) {
@@ -39,7 +39,7 @@ const AttendanceCard = ({_id, first_name,index }) => {
       return (
         <tr key = {_id}>
           <td>{index + 1}</td>
-          <td>{shortenText(first_name, 10)}</td>
+          <td>{shortenText(first_name + " " + last_name, 20)}</td>
           <tr>
               <td>
               <label>Present</label> &nbsp;

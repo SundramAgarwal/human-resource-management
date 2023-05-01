@@ -29,16 +29,6 @@ const Attendance = ({
       year: "numeric"
     });
 
-
-    // // used in AttendanceCard
-    // const shortenText = (text, n) => { 
-    //   if (text.length > n) {
-    //     const shortenedText = text.substring(0, n).concat("...")
-    //     return shortenedText
-    //   }
-    //   return text
-    // };
-
     const messageOnSubmit = () => {
       toast.success("Attendnce Marked Successfully!")
       navigate('/dashboard')
@@ -96,47 +86,12 @@ const Attendance = ({
                     </tr>
                   </thead>
                   <tbody>
-                    {/* {
+                    {
                       currentItems.map((employee, index) => {
-                        const {_id,first_name,last_name} = employee
-                        return (
-                          <tr key = {_id}>
-                            <td>{index + 1}</td>
-                            <td>{shortenText(first_name,last_name, 10)}</td>
-                            <tr>
-                                <td>
-                                <label>Present  </label> &nbsp;
-                                <input  
-                                    type="radio"  
-                                    name="isPresent" 
-                                    value={attendance?.isPresent} 
-                                    onChange={handleAttendanceChange}
-                                    /> &nbsp;
-                                <label>Absent </label> &nbsp;
-                                <input  
-                                    type="radio" 
-                                    name="isPresent" 
-                                    value={attendance?.isPresent} 
-                                    onChange={handleAttendanceChange}
-                                    />
-                                </td> 
-                               
-                            </tr>
-                          </tr>
-                        )
+                      const {_id,first_name,last_name} = employee
+                      return <AttendanceCard  _id={_id} first_name={first_name} last_name={last_name} index={index}/>
                       })
-                    } */}
-
-                 
-                     
-                      {
-
-                        currentItems.map((employee, index) => {
-                        const {_id,first_name} = employee
-                        return <AttendanceCard  _id={_id} first_name={first_name}  index={index}/>
-                        })
-
-                      }
+                    }
                   </tbody>
                 </table>
               )}
