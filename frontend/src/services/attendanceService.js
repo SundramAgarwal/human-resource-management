@@ -1,17 +1,30 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL; 
 
 export const addAttendance = async(data) => {
     try{
           console.log("data is ", data)
-          const result = await axios.post(`${BACKEND_URL}/api/attendance`,data);
-          console.log("result from backend ", result)
-    }
-    catch(error){
-        console.log("error in adding employing in attendance ", error.message);
-    }
+          const response = await axios.post(`${BACKEND_URL}/api/attendance`,data);
+          console.log("result from backend ", response)
+        } catch (error) {
+            const message =
+              (error.response && error.response.data && error.response.data.message) ||
+              error.message ||
+              error.toString();
+            toast.error(message);
+          }
 }
 
-export const getAttendance = () => {
-    
+export const getAttendance = async(employeeId) => {
+    try {
+        const response = await axios.get(`${BACKEND_URL}/api/attendance/${employeeId}`);
+        return response.data;
+    } catch (error) {
+        const message =
+          (error.response && error.response.data && error.response.data.message) ||
+          error.message ||
+          error.toString();
+        toast.error(message);
+      }
 }
