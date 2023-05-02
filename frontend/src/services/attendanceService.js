@@ -2,7 +2,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL; 
 
-export const addAttendance = async(data) => {
+export const markAttendance = async(data) => {
     try{
           console.log("data is ", data)
           const response = await axios.post(`${BACKEND_URL}/api/attendance`,data);

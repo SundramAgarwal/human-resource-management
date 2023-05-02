@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { addAttendance } from '../../services/attendanceService';
+import { markAttendance } from '../../services/attendanceService';
 
 
 const AttendanceCard = ({_id, first_name, last_name, index }) => {
@@ -34,7 +34,7 @@ const AttendanceCard = ({_id, first_name, last_name, index }) => {
             setIsPresent(e.target.value);
             // console.log("is present is ",isPresent)
             // console.log("attendende ",e.target.value)
-            await addAttendance({employeeId:_id,isPresent:e.target.value,date:date});
+            await markAttendance({employeeId:_id,isPresent:e.target.value,date:date});
   }
  
       return (
