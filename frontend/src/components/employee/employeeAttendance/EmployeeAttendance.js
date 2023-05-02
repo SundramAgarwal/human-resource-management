@@ -7,7 +7,7 @@ import { selectIsLoggedIn } from "../../../redux/features/auth/authSlice";
 import { getEmployee } from "../../../redux/features/employee/employeeSlice";
 import { SpinnerImg } from "../../loader/Loader";
 import "./EmployeeAttendance.scss";
-// import {AiOutlineEye} from "react-icons/ai"
+
 const EmployeeAttendance = () => {
 
     useRedirectLoggedOutAdmin("/login");
@@ -56,7 +56,17 @@ const EmployeeAttendance = () => {
               <tbody>
                 <tr>
                   <td>1</td>
-                  <td>01-01-2000</td>
+                  <td>2023-05-03</td>
+                  <td>Absent</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>2023-05-02</td>
+                  <td>Present</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>2023-05-01</td>
                   <td>Present</td>
                 </tr>
               </tbody>

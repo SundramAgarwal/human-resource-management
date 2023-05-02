@@ -20,7 +20,7 @@ const getEmployeeNameById =  asyncHandler (async (req, res) => {
 const markAttendance = asyncHandler (async (req, res) => {
   try {
     const { employeeId, isPresent, date } = req.body;
-    console.log("body is ", req.body)
+    // console.log("body is ", req.body)
     const data = await Attendance.findOne({employeeId,date})
     if(data){
       updateEmployeeProfile(req,res);
@@ -36,7 +36,7 @@ const markAttendance = asyncHandler (async (req, res) => {
 });
 
 // Mark attendance
-const updateEmployeeProfile= asyncHandler(async(req,res)=>{
+const updateEmployeeProfile = asyncHandler(async(req,res)=>{
      try{
           const data = await Attendance.findOneAndUpdate({employeeId:req.body.employeeId},{
             $set:{
@@ -50,9 +50,25 @@ const updateEmployeeProfile= asyncHandler(async(req,res)=>{
      }
 })
 
+//get attendance
+const getAttendance = asyncHandler(async(req,res) => {
+  const employeeId = req.params.id;
+  const attendance = await Attendance.findOne({employeeId: employeeId});
+  if (attendance) {
+    // res.status(200).json(attendance);
+    const {_id,employeeId,date,isPresent} = attendance;
+    res.status(200).json({
+      _id,employeeId,date,isPresent,
+    });
+  } else {
+    res.status(400)
+    throw new Error("attendance not found")
+  }  
+})
 
 
 module.exports = {
   markAttendance,
   getEmployeeNameById,
+  getAttendance
 };

@@ -23,14 +23,15 @@ const Attendance = ({
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const today = new Date();
-    const date = today.toLocaleDateString("en-US", {
+    const date = today.toLocaleDateString("en-IN", { 
+      timeZone: 'Asia/Kolkata',
       day: "numeric",
       month: "short",
       year: "numeric"
     });
 
     const messageOnSubmit = () => {
-      toast.success("Attendnce Marked Successfully!")
+      toast.success("Attendance Marked Successfully!")
       navigate('/dashboard')
     }
 

@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 const today = new Date();
-const date = today.toLocaleDateString("en-US", {
+const options = { 
+  timeZone: 'Asia/Kolkata',
   day: "numeric",
   month: "short",
   year: "numeric"
-});
+};
+const date = today.toLocaleDateString("en-IN", options);
 
 const attendanceSchema = new mongoose.Schema({
   employeeId: {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { addAttendance } from '../../services/attendanceService';
 
 
@@ -12,7 +12,8 @@ const AttendanceCard = ({_id, first_name, last_name, index }) => {
     return text
   };
   const today = new Date();
-      const date = today.toLocaleDateString("en-US", {
+      const date = today.toLocaleDateString("en-US", { 
+        timeZone: 'Asia/Kolkata',
         day: "numeric",
         month: "short",
         year: "numeric"

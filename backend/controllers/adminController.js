@@ -135,7 +135,7 @@ const getAdmin = asyncHandler(async (req,res) => {
         throw new Error("admin not found!")
     }
 });
-
+ 
 //get login status
 const loginStatus = asyncHandler (async (req,res) => {
     const token = req.cookies.token;
