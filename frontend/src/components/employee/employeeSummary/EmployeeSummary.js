@@ -13,8 +13,8 @@ import { CALC_DEPARTMENT,
 //Icons 
 const departmentIcon = <AiOutlineFile size = {40} color = '#fff' />
 const employeeIcon= <IoIosMan size = {40} color = 'white'/>
-const categoryIcon= <BiCategory size = {40} color = '#fff'/>
-const projectIcon= <GrProjects size = {30} color = 'white'/>
+// const categoryIcon= <BiCategory size = {40} color = '#fff'/>
+// const projectIcon= <GrProjects size = {30} color = 'white'/>
 
 
 //Format Amount
@@ -36,8 +36,8 @@ const EmployeeSummary = ({employees}) => {
       <div className='info-summary'>
         <InfoBox icon = {employeeIcon} title = {'Total Employees'} count = {employees.length} bgColor = 'card1'/>
         <InfoBox icon = {departmentIcon} title = {'Total Departments'} count = {department.length} bgColor = 'card2'/>
-        <InfoBox icon = {projectIcon} title = {'Running Projects'} count = {5} bgColor = 'card3'/>
-        <InfoBox icon = {categoryIcon} title = {'Upcoming Projects'} count = {9} bgColor = 'card4'/>
+        {/* <InfoBox icon = {projectIcon} title = {'Running Projects'} count = {5} bgColor = 'card3'/>
+        <InfoBox icon = {categoryIcon} title = {'Upcoming Projects'} count = {9} bgColor = 'card4'/> */}
         {/* <InfoBox icon = {earningIcon} title = {'Total Store Value'} count = {`$${formatNumbers(totalStoreValue.toFixed(2))}`} bgColor = 'card2'/> */}
 
       </div>

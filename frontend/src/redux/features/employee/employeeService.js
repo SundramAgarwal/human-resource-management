@@ -39,7 +39,7 @@ const employeeService = {
     getEmployees,
     getEmployee,
     deleteEmployee,
-    updateEmployee,
+    updateEmployee, 
   };
   
   export default employeeService;

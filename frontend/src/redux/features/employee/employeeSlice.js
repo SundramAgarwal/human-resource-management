@@ -10,7 +10,7 @@ const initialState = {
   isLoading: false,
   message: "",
   // totalStoreValue: 0,
-  // outOfStock: 0,
+  // outOfStock: 0, 
   department: [],
 };
 

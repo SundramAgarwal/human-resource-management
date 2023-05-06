@@ -73,6 +73,14 @@ useEffect(() => {
   dispatch(FILTER_EMPLOYEES({employees,search}))
 },[employees,search,dispatch]);
 
+// useEffect(() => {
+//   currentItems.map((employee) => {
+//     const {employeeId} = employee
+//     return (
+//       dispatch(FILTER_ATTENDANCE({attendances,employeeId,searchDate}))
+//     )
+//   })},[employee,attendances,searchDate,dispatch])
+
   return (
     <div className='product-list'>
       <hr/>

@@ -21,19 +21,11 @@ const AttendanceCard = ({_id, first_name, last_name, index }) => {
 
   const [isPresent, setIsPresent]= useState("");
 
-  // useEffect(()=>{
-  //   addData();
-  // },[]);
-
-  // const addData= async()=>{
-  //        await addAttendance({employeeId:_id,isPresent:false,date:date});
-  // }
-
 
   const handleAttendanceChange=async(e)=>{
             setIsPresent(e.target.value);
             // console.log("is present is ",isPresent)
-            // console.log("attendende ",e.target.value)
+            // console.log("attendance ",e.target.value)
             await markAttendance({employeeId:_id,isPresent:e.target.value,date:date});
   }
  
@@ -64,7 +56,5 @@ const AttendanceCard = ({_id, first_name, last_name, index }) => {
         </tr>
       )
     }
-//   )
-// }
 
 export default AttendanceCard;

@@ -16,7 +16,7 @@ export const markAttendance = async(data) => {
           }
 }
 
-export const getAttendance = async(employeeId) => {
+const fetchAttendanceById = async(employeeId) => {
     try {
         const response = await axios.get(`${BACKEND_URL}/api/attendance/${employeeId}`);
         return response.data;
@@ -28,3 +28,10 @@ export const getAttendance = async(employeeId) => {
         toast.error(message);
       }
 }
+
+
+const attendanceService = {
+  fetchAttendanceById 
+};
+
+export default attendanceService;

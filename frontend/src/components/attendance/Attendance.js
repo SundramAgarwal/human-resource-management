@@ -90,7 +90,12 @@ const Attendance = ({
                     {
                       currentItems.map((employee, index) => {
                       const {_id,first_name,last_name} = employee
-                      return <AttendanceCard  _id={_id} first_name={first_name} last_name={last_name} index={index}/>
+                      return <AttendanceCard  
+                                _id={_id} 
+                                first_name={first_name} 
+                                last_name={last_name} 
+                                index={index}
+                              />
                       })
                     }
                   </tbody>

@@ -24,6 +24,8 @@ const attendanceSchema = new mongoose.Schema({
     required: true,
     default: false
   }
+},{
+  timestamps: true,
 });
 
 const Attendance = mongoose.model('Attendance', attendanceSchema);

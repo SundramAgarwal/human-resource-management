@@ -50,11 +50,11 @@ const Contact = () => {
                     <div className='icons'>
                         <span>
                             <FaPhoneAlt/>
-                            <p>+91 000 000 000</p>
+                            <p>+91 7905930105</p>
                         </span>
                         <span>
                             <FaEnvelope/>
-                            <p>abc@gmail.com</p>
+                            <p>humanresource@gmail.com</p>
                         </span>
                         <span>
                             <GoLocation/>

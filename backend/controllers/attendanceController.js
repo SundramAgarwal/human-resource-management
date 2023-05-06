@@ -20,14 +20,15 @@ const getEmployeeNameById =  asyncHandler (async (req, res) => {
 const markAttendance = asyncHandler (async (req, res) => {
   try {
     const { employeeId, isPresent, date } = req.body;
-    // console.log("body is ", req.body)
+    console.log("body is ", req.body)
     const data = await Attendance.findOne({employeeId,date})
     if(data){
       updateEmployeeProfile(req,res);
       return res.status(200).json({msg:"already present"})
     }
-    const attendance = new Attendance({ employeeId, isPresent });
+    const attendance = new Attendance({ employeeId, date, isPresent:isPresent === 'true' ? true : false });
     await attendance.save();
+    res.status(201).json(attendance);
     res.json({ message: 'Attendance marked successfully' });
   } catch (err) {
     console.error(err);
@@ -35,10 +36,10 @@ const markAttendance = asyncHandler (async (req, res) => {
   }
 });
 
-// Mark attendance
+// update attendance
 const updateEmployeeProfile = asyncHandler(async(req,res)=>{
      try{
-          const data = await Attendance.findOneAndUpdate({employeeId:req.body.employeeId},{
+          const data = await Attendance.findOneAndUpdate({employeeId:req.body.employeeId, date:req.body.date},{
             $set:{
               isPresent:req.body.isPresent
             }
@@ -50,25 +51,28 @@ const updateEmployeeProfile = asyncHandler(async(req,res)=>{
      }
 })
 
-//get attendance
-const getAttendance = asyncHandler(async(req,res) => {
-  const employeeId = req.params.id;
-  const attendance = await Attendance.findOne({employeeId: employeeId});
-  if (attendance) {
-    // res.status(200).json(attendance);
-    const {_id,employeeId,date,isPresent} = attendance;
-    res.status(200).json({
-      _id,employeeId,date,isPresent,
-    });
-  } else {
-    res.status(400)
-    throw new Error("attendance not found")
-  }  
-})
 
+const getAttendanceByEmployeeId = async (req, res) => {
+  const employeeId = req.params.id;
+
+  try {
+    const attendanceRecords = await Attendance.find({employeeId: employeeId });
+
+    res.status(200).json({
+      success: true,
+      data: attendanceRecords,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: 'Server error',
+    });
+  }
+};
 
 module.exports = {
   markAttendance,
   getEmployeeNameById,
-  getAttendance
+  getAttendanceByEmployeeId
 };
