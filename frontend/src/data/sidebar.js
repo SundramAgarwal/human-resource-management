@@ -6,7 +6,7 @@ const sideBarMenu = [
     {
         title: "Dashboard",
         icon: <FaTh/>,
-        path: "/dashboard",
+        path: "/dashboard", 
     },
     {
         title: "Add Employee",

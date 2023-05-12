@@ -64,6 +64,7 @@ const registerAdmin = asyncHandler( async (req,res) => {
         throw new Error("Invalid admin data!")
     }
 });
+  
 
 // Login admin
 const loginAdmin = asyncHandler(async (req,res) => {
@@ -122,7 +123,7 @@ const logout = asyncHandler(async (req,res) => {
     return res.status(200).json({message: "Successfully Logged Out"})
 });
 
-//get Admin data
+//get Admin data 
 const getAdmin = asyncHandler(async (req,res) => {
     const admin = await Admin.findById(req.admin._id)
     if(admin) {

@@ -7,7 +7,6 @@ import { getEmployee } from "../../../redux/features/employee/employeeSlice";
 import Card from "../../card/Card";
 import { SpinnerImg } from "../../loader/Loader";
 import "./EmployeeDetail.scss";
-// import DOMPurify from "dompurify";
 
 const EmployeeDetail = () => {
   useRedirectLoggedOutAdmin("/login");
@@ -43,15 +42,8 @@ const EmployeeDetail = () => {
         {isLoading && <SpinnerImg />}
         {employee && (
           <div className="detail">
-            <Card cardClass="group">
-              {employee?.image ? (
-                <img
-                  src={employee.image.filePath}
-                  alt={employee.image.fileName}
-                />
-              ) : (
-                <p>No image set for this employee</p>
-              )}
+            <Card cardClass='group'>
+              <img src = {employee.image} alt = {employee.image.filePath}/>
             </Card>
             <h4>Employee Availability: {classes(employee.class_assigned)}</h4>
             <hr />
@@ -98,11 +90,6 @@ const EmployeeDetail = () => {
             <p>
               <b>&rarr; Address: </b> {employee.address}
             </p>
-            {/* <div
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(employee.address),
-              }}
-            ></div>{employee.address} */}
             <hr />
             <code className="--color-dark">
               Created on: {employee.createdAt.toLocaleString("en-US")}

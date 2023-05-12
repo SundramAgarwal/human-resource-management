@@ -5,7 +5,7 @@ const protect = require("../middleWare/authMiddleware");
 const router = express.Router();
 
 router.post("/",protect, markAttendance);
-router.get('/:id',getAttendanceByEmployeeId)
+router.get('/getAttendance/:id',getAttendanceByEmployeeId)
 
 
 module.exports = router;

@@ -4,13 +4,18 @@ import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 import { BrowserRouter,Routes,Route} from "react-router-dom"
 import Home from "./pages/Home/Home";
 import Reset from "./pages/authentication/Reset";
+import EmployeeReset from "./pages/employeeAuthentication/EmployeeReset";
 import Forgot from "./pages/authentication/Forgot";
+import EmployeeForgot from "./pages/employeeAuthentication/EmployeeForgot";
 import Login from "./pages/authentication/Login";
+import EmployeeLogin from "./pages/employeeAuthentication/EmployeeLogin";
 import Register from "./pages/authentication/Register";
 import Dashboard from './pages/dashboard/Dashboard';
+import EmployeeDashboard from './pages/dashboard/EmployeeDashboard';
 import MarkAttendance from './pages/Attendance/MarkAttendance';
 import ViewAttendance from './pages/Attendance/ViewAttendance';
 import Sidebar from './components/sidebar/Sidebar';
+import EmployeeSidebar from './components/sidebar/EmployeeSidebar';
 import Layout from './components/layout/Layout';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,8 +28,10 @@ import EmployeeDetail from './components/employee/employeeDetail/EmployeeDetail'
 import Profile from './pages/profile/Profile';
 import EditEmployee from './pages/editEmployee/EditEmployee';
 import EditProfile from './pages/profile/EditProfile';
+import EmployeeEditProfile from './pages/profile/EmployeeEditProfile'
 import Contact from './pages/contact/Contact';
 import EmployeeAttendance from './components/employee/employeeAttendance/EmployeeAttendance';
+import { ShowWhenEmployeeIsLoggedInAndAdminIsLoggedOut, ShowWhenEmployeeIsLoggedOutAndAdminIsLoggedIn } from './components/protect/HiddenLink';
 
 axios.defaults.withCredentials = true;
 
@@ -48,15 +55,25 @@ function App() {
       <Routes>
         <Route path = "/" element = {<Home/>} />
         <Route path = "/login" element = {<Login/>} />
+        <Route path = "/employeelogin" element = {<EmployeeLogin/>} />
         <Route path = "/register" element = {<Register/>} />
         <Route path = "/forgot" element = {<Forgot/>} />
+        <Route path = "/employeeforgot" element = {<EmployeeForgot/>} />
         <Route path = "/resetpassword/:resetToken" element = {<Reset/>} />
+        <Route path = "/employeeresetpassword/:resetToken" element = {<EmployeeReset/>} />
         <Route path = "/dashboard" element = {
           <Sidebar>
             <Layout>
               <Dashboard/>
             </Layout>
           </Sidebar>
+        } />
+        <Route path = "/employeedashboard" element = {
+          <EmployeeSidebar>
+            <Layout>
+              <EmployeeDashboard/>
+            </Layout>
+          </EmployeeSidebar>
         } />
         <Route
           path="/add-employee" element={
@@ -104,12 +121,33 @@ function App() {
           }
         />
         <Route
-          path="/contact-us" element={
-            <Sidebar>
+          path="/employee-edit-profile" element={
+            <EmployeeSidebar>
               <Layout>
-                <Contact />
+                <EmployeeEditProfile />
               </Layout>
-            </Sidebar>
+            </EmployeeSidebar>
+          }
+        />
+        <Route
+          path="/contact-us" element={
+            <>
+              <ShowWhenEmployeeIsLoggedOutAndAdminIsLoggedIn>
+                <Sidebar>
+                  <Layout>
+                    <Contact />
+                  </Layout>
+                </Sidebar>
+              </ShowWhenEmployeeIsLoggedOutAndAdminIsLoggedIn>
+
+              <ShowWhenEmployeeIsLoggedInAndAdminIsLoggedOut>
+                <EmployeeSidebar>
+                  <Layout>
+                    <Contact />
+                  </Layout>
+                </EmployeeSidebar>
+              </ShowWhenEmployeeIsLoggedInAndAdminIsLoggedOut>
+            </>
           }
         />
         <Route

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs")
 
 const employeeSchema = mongoose.Schema({
     admin: {
@@ -8,13 +9,18 @@ const employeeSchema = mongoose.Schema({
     },
     first_name: {
         type: String,
-        required: [true,"Please add the first name"],
+        // required: [true,"Please add the first name"],
         trim: true,
     },
     last_name: {
         type: String,
-        required: [true,"Please add the last name"],
+        // required: [true,"Please add the last name"],
         trim: true,
+    },
+    password: {
+        type: String,
+        // required: [true, "Please add a password!"],
+        minLength: [6, "Password must be up to 6 characters!"]
     },
     employee_code: {
         type: String,
@@ -23,52 +29,52 @@ const employeeSchema = mongoose.Schema({
     },
     department: {
         type: String,
-        required: [true, "Please add the department"],
+        // required: [true, "Please add the department"],
         trim: true,
     },
     designation: {
         type: String,
-        required: [true, "Please add the designation"],
+        // required: [true, "Please add the designation"],
         trim: true,
     },
     role: {
         type: String,
-        required: [true, "Please add the role"],
+        // required: [true, "Please add the role"],
         trim: true,
     },
     class_assigned: {
         type: String,
-        required: [true],
+        // required: [true],
         trim: true,
     },
     gender: {
         type: String,
-        required: [true, "Please specify gender"],
+        // required: [true, "Please specify gender"],
         trim: true,
     },
     blood_group: {
         type: String,
-        required: [true, "Please add the blood_group"],
+        // required: [true, "Please add the blood_group"],
         trim: true,
     },
     contact_number: {
         type: String,
-        required: [true],
+        // required: [true],
         default: "+91"
     },
     date_of_birth: {
         type: String,
-        required: [true],
+        // required: [true],
         trim: true,
     },
     date_of_joining: {
         type: String,
-        required: [true],
+        // required: [true],
         trim: true,
     },
     email: {
         type: String,
-        required: [true, "Please add a email!"],
+        // required: [true, "Please add a email!"],
         unique: true,
         trim: true,
         match: [
@@ -78,16 +84,30 @@ const employeeSchema = mongoose.Schema({
     },
     address: {
         type: String,
-        required: [true, "Please add the address"],
+        // required: [true, "Please add the address"],
         trim: true,
     },
     image: {
-        type: Object,
-        default: {},
+        type: String,
+        // required: [true, "Please add a photo"],
+        default: "https://i.ibb.co/4pDNDk1/avatar.png"
     },
 }, {
     timestamps: true,
 });
+// Encrypt password before saving it to DB
+employeeSchema.pre("save", async function(next) {
+    if(!this.isModified("password")) {
+        return next()
+    }
+
+    // hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(this.password, salt);
+    this.password = hashedPassword;
+    next()
+
+})
 
 const Employee = mongoose.model("Employee", employeeSchema);
 module.exports = Employee;

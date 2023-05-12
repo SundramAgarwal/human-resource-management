@@ -32,27 +32,24 @@ const AttendanceCard = ({_id, first_name, last_name, index }) => {
       return (
         <tr key = {_id}>
           <td>{index + 1}</td>
-          <td>{shortenText(first_name + " " + last_name, 20)}</td>
-          <tr>
-              <td>
-              <label>Present</label> &nbsp;
-              <input  
-                  type="radio"  
-                  name={_id}
-                  value="true"
-                  onChange={handleAttendanceChange}
-                  /> &nbsp;
-              <label>Absent</label> &nbsp;
-              <input  
-                  type="radio" 
-                  name={_id}
-                  value="false" 
-                  // value ka matlb yeh hota hai ki backend me kya cheej save honi hai
-                  onChange={handleAttendanceChange}
-                  />
-              </td> 
-             
-          </tr>
+          <td>{shortenText(first_name + " " + last_name, 20)}</td> 
+          <td>
+            <label>Present</label> &nbsp;
+            <input  
+              type="radio"  
+              name={_id}
+              value="true"
+              onChange={handleAttendanceChange}
+            /> &nbsp;
+            <label>Absent</label> &nbsp;
+            <input  
+              type="radio" 
+              name={_id}
+              value="false" 
+              // value ka matlb yeh hota hai ki backend me kya cheej save honi hai
+              onChange={handleAttendanceChange}
+            />
+          </td> 
         </tr>
       )
     }

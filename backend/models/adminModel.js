@@ -5,11 +5,11 @@ const bcrypt = require("bcryptjs")
 const adminSchema = mongoose.Schema({
     name: {
         type: String,
-        required: [true, "Please add a name!"]
+        // required: [true, "Please add a name!"]
     },
     email: {
         type: String,
-        required: [true, "Please add a email!"],
+        // required: [true, "Please add a email!"],
         unique: true,
         trim: true,
         match: [
@@ -19,12 +19,12 @@ const adminSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true, "Please add a password!"],
+        // required: [true, "Please add a password!"],
         minLength: [6, "Password must be up to 6 characters!"]
     },
     photo: {
         type: String,
-        required: [true, "Please add a photo"],
+        // required: [true, "Please add a photo"],
         default: "https://i.ibb.co/4pDNDk1/avatar.png"
     },
     phone: {

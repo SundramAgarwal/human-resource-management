@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import "./EmployeeSummary.scss"
 import { AiOutlineFile } from 'react-icons/ai'
-import { GrProjects} from 'react-icons/gr'
+// import { GrProjects} from 'react-icons/gr'
 import { IoIosMan } from 'react-icons/io'
-import { BiCategory } from 'react-icons/bi'
+// import { BiCategory } from 'react-icons/bi'
 import InfoBox from '../../infoBox/InfoBox'
 import { useDispatch, useSelector } from 'react-redux'
 import { CALC_DEPARTMENT,

@@ -30,7 +30,7 @@ const EmployeeAttendance = () => {
         console.log(message);
       }
       axios
-        .get(`${BACKEND_URL}/api/attendance/${id}`)
+        .get(`${BACKEND_URL}/api/attendance/getAttendance/${id}`)
         .then((response) => {
           setAttendanceRecords(response.data.data);
         })
@@ -51,7 +51,7 @@ const EmployeeAttendance = () => {
       const filteredAttendanceRecords = attendanceRecords.filter(record => {
         const createdAtDate = new Date(record.createdAt).toLocaleDateString();
         return createdAtDate.includes(search);
-      });
+      }).reverse();
 
   return (
     <div className="product-list">

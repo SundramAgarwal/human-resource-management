@@ -3,7 +3,7 @@ import { GiHumanPyramid } from "react-icons/gi"
 import {Link} from 'react-router-dom'
 import './Home.css';
 import heroImg from "../../assets/img_1485.jpg";
-import { ShowOnLogin, ShowOnLogout } from '../../components/protect/HiddenLink';
+import { ShowWhenBothAreLogout, ShowWhenEmployeeIsLoggedInAndAdminIsLoggedOut, ShowWhenEmployeeIsLoggedOutAndAdminIsLoggedIn } from '../../components/protect/HiddenLink';
 const Home = () => {
   return (
     <div className='home --hom'>
@@ -12,23 +12,37 @@ const Home = () => {
                 <GiHumanPyramid size = {80}/>
             </div>
             <ul className='home-links'>
-            <ShowOnLogout>
-                {/* <li>
+            <ShowWhenBothAreLogout>
+            {/* <li>
                     <Link to='/register'>Register</Link>
                 </li> */}
                 <li>
                     <button className='--btn --btn-primary'>
-                        <Link to='/login'>Login</Link>
+                        <Link to='/login'>Admin Login</Link>
                     </button>
                 </li>
-            </ShowOnLogout>
-            <ShowOnLogin>
                 <li>
                     <button className='--btn --btn-primary'>
-                        <Link to='/dashboard'>Dashboard</Link>
+                        <Link to='/employeelogin'>Employee Login</Link>
                     </button>
                 </li>
-            </ShowOnLogin>
+            </ShowWhenBothAreLogout>
+
+            <ShowWhenEmployeeIsLoggedOutAndAdminIsLoggedIn>
+                <li>
+                    <button className='--btn --btn-primary'>
+                        <Link to='/dashboard'>Admin Dashboard</Link>
+                    </button>
+                </li>
+            </ShowWhenEmployeeIsLoggedOutAndAdminIsLoggedIn>
+
+            <ShowWhenEmployeeIsLoggedInAndAdminIsLoggedOut>
+                <li>
+                    <button className='--btn --btn-primary'>
+                        <Link to='/employeedashboard'>Employee Dashboard</Link>
+                    </button>
+                </li>
+            </ShowWhenEmployeeIsLoggedInAndAdminIsLoggedOut>
             </ul>
 
         </nav>

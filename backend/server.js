@@ -36,7 +36,7 @@ app.use("/api/attendance",attendanceRoute)
 app.get("/", (req,res) => {
     res.send("Home Page");
 });
-
+ 
 // Error Middleware
 app.use(errorHandler);
 

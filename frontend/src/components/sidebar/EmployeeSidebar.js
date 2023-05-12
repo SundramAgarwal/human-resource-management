@@ -2,11 +2,11 @@ import React,{useState} from 'react';
 import "./Sidebar.scss";
 import { GiHumanPyramid } from "react-icons/gi";
 import { HiMenuAlt3 } from "react-icons/hi";
-import sideBarMenu from '../../data/sidebar';
+import sideBarMenu from '../../data/employeeSidebar';
 import SidebarItem from './SidebarItem';
 import { useNavigate } from 'react-router-dom';
 
-const Sidebar = ({children}) => {
+const EmployeeSidebar = ({children}) => {
   const [isOpen, setIsOpen] = useState(true); 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -44,4 +44,4 @@ const Sidebar = ({children}) => {
   )
 }
 
-export default Sidebar;
+export default EmployeeSidebar;
