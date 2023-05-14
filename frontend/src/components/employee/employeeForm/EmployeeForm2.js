@@ -3,19 +3,13 @@ import Card from "../../card/Card";
 
 import "./EmployeeForm.scss";
 
-const EmployeeForm2 = ({ 
-  employee,
-  handleInputChange,
-  saveEmployee,
-}) => { 
-
+const EmployeeForm2 = ({ employee, handleInputChange, saveEmployee }) => {
   // console.log("employee details ",employee)
 
   return (
     <div className="add-product">
       <Card cardClass={"card"}>
         <form onSubmit={saveEmployee}>
-         
           <label>First Name:</label>
           <input
             type="text"
@@ -55,14 +49,26 @@ const EmployeeForm2 = ({
             <option value="">Select a department</option>
             <option value="Aerospace Engineering">Aerospace Engineering</option>
             <option value="Chemical Engineering">Chemical Engineering</option>
-            <option value="Civil and Environmental Engineering">Civil and Environmental Engineering</option>
-            <option value="Computer Science and Engineering">Computer Science and Engineering</option>
-            <option value="Electrical and Computer Engineering">Electrical and Computer Engineering</option>
-            <option value="Materials Science and Engineering">Materials Science and Engineering</option>
-            <option value="Mechanical Engineering">Mechanical Engineering</option>
+            <option value="Civil and Environmental Engineering">
+              Civil and Environmental Engineering
+            </option>
+            <option value="Computer Science and Engineering">
+              Computer Science and Engineering
+            </option>
+            <option value="Electrical and Computer Engineering">
+              Electrical and Computer Engineering
+            </option>
+            <option value="Materials Science and Engineering">
+              Materials Science and Engineering
+            </option>
+            <option value="Mechanical Engineering">
+              Mechanical Engineering
+            </option>
             <option value="Nuclear Engineering">Nuclear Engineering</option>
             <option value="Computer Applications">Computer Applications</option>
-            <option value="Systems and Industrial Engineering">Systems and Industrial Engineering</option>
+            <option value="Systems and Industrial Engineering">
+              Systems and Industrial Engineering
+            </option>
             <option value="Law">Law</option>
             <option value="Mathematics">Mathematics</option>
             <option value="Medicine">Medicine</option>
@@ -156,13 +162,14 @@ const EmployeeForm2 = ({
             name="date_of_birth"
             value={employee?.date_of_birth || ""}
             onChange={handleInputChange}
-            style={{ width: "100%",
-                     height: "3.5vh",
-                     margin:"10px 0 10px 0 ",
-                     padding: "8px 12px",
-                     boxSizing: "border-box",
-                     fontSize: "16px"  
-                    }}
+            style={{
+              width: "100%",
+              height: "3.5vh",
+              margin: "10px 0 10px 0 ",
+              padding: "8px 12px",
+              boxSizing: "border-box",
+              fontSize: "16px",
+            }}
             disabled
           />
 
@@ -172,24 +179,27 @@ const EmployeeForm2 = ({
             name="date_of_joining"
             value={employee?.date_of_joining || ""}
             onChange={handleInputChange}
-            style={{ width: "100%",
-                     height: "3.5vh",
-                     margin:"10px 0 10px 0 ",
-                     padding: "8px 12px",
-                     boxSizing: "border-box",
-                     fontSize: "16px" 
-                    }}
+            style={{
+              width: "100%",
+              height: "3.5vh",
+              margin: "10px 0 10px 0 ",
+              padding: "8px 12px",
+              boxSizing: "border-box",
+              fontSize: "16px",
+            }}
             disabled
           />
 
           <label>Address:</label>
-          <textarea 
-            rows = '5' 
-            cols = '42' 
-            name = 'address' 
-            style={{fontSize: '16px',resize: "none"}}
-            value = {employee?.address || ""} 
-            onChange={handleInputChange} disabled></textarea>
+          <textarea
+            rows="5"
+            cols="47"
+            name="address"
+            style={{ fontSize: "16px", resize: "none" }}
+            value={employee?.address || ""}
+            onChange={handleInputChange}
+            disabled
+          ></textarea>
 
           <div className="--my">
             <button type="submit" className="--btn --btn-primary">

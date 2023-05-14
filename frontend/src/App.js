@@ -30,7 +30,10 @@ import EditEmployee from './pages/editEmployee/EditEmployee';
 import EditProfile from './pages/profile/EditProfile';
 import EmployeeEditProfile from './pages/profile/EmployeeEditProfile'
 import Contact from './pages/contact/Contact';
+import LeaveApplications from "./pages/leaveApplication/LeaveApplications"
+import AppliedApplications from "./pages/leaveApplication/AppliedApplications"
 import EmployeeAttendance from './components/employee/employeeAttendance/EmployeeAttendance';
+import EmployeeAllApplications from './components/employee/employeeApplication/EmployeeAllApplications'
 import { ShowWhenEmployeeIsLoggedInAndAdminIsLoggedOut, ShowWhenEmployeeIsLoggedOutAndAdminIsLoggedIn } from './components/protect/HiddenLink';
 
 axios.defaults.withCredentials = true;
@@ -173,6 +176,33 @@ function App() {
             <Sidebar>
               <Layout>
                 <EmployeeAttendance />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/leave-applications" element={
+            <Sidebar>
+              <Layout>
+                <LeaveApplications />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/applied-applications" element={
+            <Sidebar>
+              <Layout>
+                <AppliedApplications />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/employee-all-applications/:id" element={
+            <Sidebar>
+              <Layout>
+                <EmployeeAllApplications />
               </Layout>
             </Sidebar>
           }

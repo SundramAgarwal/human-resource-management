@@ -63,16 +63,16 @@ const AddEmployee = () => {
     const today = new Date();
     const dobDate = new Date(dob);
     const ageDiffMs = today - dobDate;
-    const ageDate = new Date(ageDiffMs); 
+    const ageDate = new Date(ageDiffMs);
     const age = Math.abs(ageDate.getUTCFullYear() - 1970);
-    
+
     return age >= 22;
   };
 
   const validateDateOfJoining = (doj) => {
     const today = new Date();
     const dojDate = new Date(doj);
-    
+
     return dojDate <= today;
   };
 
@@ -88,7 +88,7 @@ const AddEmployee = () => {
       alert("Date of joining cannot be in the future");
       return;
     }
-    
+
     const formData = {
       first_name: first_name,
       last_name: last_name,
@@ -103,9 +103,9 @@ const AddEmployee = () => {
       contact_number: contact_number,
       date_of_birth: date_of_birth,
       date_of_joining: date_of_joining,
-      address: address
+      address: address,
     };
-  
+
     const data = await dispatch(createEmployee(formData));
     console.log(data);
     navigate("/dashboard");
@@ -125,11 +125,6 @@ const AddEmployee = () => {
 };
 
 export default AddEmployee;
-
-
-
-
-
 
 // import axios from "axios";
 

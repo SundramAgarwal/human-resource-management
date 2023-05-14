@@ -1,5 +1,6 @@
 import React from 'react'
 import {FaTh,FaRegChartBar,FaCommentAlt} from "react-icons/fa";
+import {RxTimer} from "react-icons/rx"
 import { BiImageAdd } from 'react-icons/bi';
 import { ImUserCheck } from 'react-icons/im';
 const sideBarMenu = [
@@ -38,6 +39,20 @@ const sideBarMenu = [
             {
                 title: "View Attendance",
                 path: "/view-attendance",
+            },
+        ],
+    },
+    {
+        title: "Leave",
+        icon:   <RxTimer/>,
+        childrens: [
+            {
+                title: "Leave Applications",
+                path: "/leave-applications",
+            },
+            {
+                title: "Applied Applications",
+                path: "/applied-applications",
             },
         ],
     },

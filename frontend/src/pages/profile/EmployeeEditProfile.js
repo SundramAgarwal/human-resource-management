@@ -194,7 +194,7 @@ const saveProfile = async (e) => {
               <label>Address:</label><br/>
               <textarea
                      rows = '5' 
-                     cols = '42' 
+                     cols = '47' 
                      name='address' 
                      style={{fontSize: '16px',resize: "none"}}
                      value = {employeeProfile?.address} 

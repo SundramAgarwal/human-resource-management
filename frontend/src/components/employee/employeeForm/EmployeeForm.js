@@ -2,19 +2,14 @@ import React from "react";
 import Card from "../../card/Card";
 import "./EmployeeForm.scss";
 
-
-const EmployeeForm = ({ 
-  employee,
-  handleInputChange,
-  saveEmployee,
-}) => {
-
+const EmployeeForm = ({ employee, handleInputChange, saveEmployee }) => {
   return (
     <div className="add-product">
       <Card cardClass={"card"}>
         <form onSubmit={saveEmployee}>
-
-          <label>First Name:<span style={{color: "red"}}>*</span></label>
+          <label>
+            First Name:<span style={{ color: "red" }}>*</span>
+          </label>
           <input
             type="text"
             placeholder="Employee First name"
@@ -24,7 +19,9 @@ const EmployeeForm = ({
             required
           />
 
-          <label>Last Name:<span style={{color: "red"}}>*</span></label>
+          <label>
+            Last Name:<span style={{ color: "red" }}>*</span>
+          </label>
           <input
             type="text"
             placeholder="Employee last name"
@@ -34,7 +31,9 @@ const EmployeeForm = ({
             required
           />
 
-          <label>Email:<span style={{color: "red"}}>*</span></label>
+          <label>
+            Email:<span style={{ color: "red" }}>*</span>
+          </label>
           <input
             type="email"
             placeholder="Employee gmail Address"
@@ -44,7 +43,9 @@ const EmployeeForm = ({
             required
           />
 
-          <label>Department:<span style={{color: "red"}}>*</span></label>
+          <label>
+            Department:<span style={{ color: "red" }}>*</span>
+          </label>
           <select
             name="department"
             value={employee?.department}
@@ -54,14 +55,26 @@ const EmployeeForm = ({
             <option value="">Select a department</option>
             <option value="Aerospace Engineering">Aerospace Engineering</option>
             <option value="Chemical Engineering">Chemical Engineering</option>
-            <option value="Civil and Environmental Engineering">Civil and Environmental Engineering</option>
-            <option value="Computer Science and Engineering">Computer Science and Engineering</option>
-            <option value="Electrical and Computer Engineering">Electrical and Computer Engineering</option>
-            <option value="Materials Science and Engineering">Materials Science and Engineering</option>
-            <option value="Mechanical Engineering">Mechanical Engineering</option>
+            <option value="Civil and Environmental Engineering">
+              Civil and Environmental Engineering
+            </option>
+            <option value="Computer Science and Engineering">
+              Computer Science and Engineering
+            </option>
+            <option value="Electrical and Computer Engineering">
+              Electrical and Computer Engineering
+            </option>
+            <option value="Materials Science and Engineering">
+              Materials Science and Engineering
+            </option>
+            <option value="Mechanical Engineering">
+              Mechanical Engineering
+            </option>
             <option value="Nuclear Engineering">Nuclear Engineering</option>
             <option value="Computer Applications">Computer Applications</option>
-            <option value="Systems and Industrial Engineering">Systems and Industrial Engineering</option>
+            <option value="Systems and Industrial Engineering">
+              Systems and Industrial Engineering
+            </option>
             <option value="Law">Law</option>
             <option value="Mathematics">Mathematics</option>
             <option value="Medicine">Medicine</option>
@@ -72,9 +85,10 @@ const EmployeeForm = ({
             <option value="Education">Education</option>
             <option value="Other/Unknown">Other/Unknown</option>
           </select>
-  
 
-          <label>Designation:<span style={{color: "red"}}>*</span></label>
+          <label>
+            Designation:<span style={{ color: "red" }}>*</span>
+          </label>
           <select
             name="designation"
             value={employee?.designation}
@@ -95,7 +109,9 @@ const EmployeeForm = ({
             <option value="Other/Unknown">Other/Unknown</option>
           </select>
 
-          <label>Classes Assigned:<span style={{color: "red"}}>*</span></label>
+          <label>
+            Classes Assigned:<span style={{ color: "red" }}>*</span>
+          </label>
           <input
             type="text"
             placeholder="Classes"
@@ -105,7 +121,9 @@ const EmployeeForm = ({
             required
           />
 
-          <label>Role:<span style={{color: "red"}}>*</span></label>
+          <label>
+            Role:<span style={{ color: "red" }}>*</span>
+          </label>
           <select
             name="role"
             value={employee?.role}
@@ -123,7 +141,9 @@ const EmployeeForm = ({
             <option value="Guest Faculty">Guest Faculty</option>
           </select>
 
-          <label >Gender:<span style={{color: "red"}}>*</span></label>
+          <label>
+            Gender:<span style={{ color: "red" }}>*</span>
+          </label>
           <select
             name="gender"
             value={employee?.gender}
@@ -141,10 +161,14 @@ const EmployeeForm = ({
             <option value="Bigender">Bigender</option>
             <option value="Genderfluid">Genderfluid</option>
             <option value="Transgender">Transgender</option>
-            <option value="Other/Prefer not to say">Other/Prefer not to say</option>
+            <option value="Other/Prefer not to say">
+              Other/Prefer not to say
+            </option>
           </select>
 
-          <label>Blood Group:<span style={{color: "red"}}>*</span></label>
+          <label>
+            Blood Group:<span style={{ color: "red" }}>*</span>
+          </label>
           <select
             name="blood_group"
             value={employee?.blood_group}
@@ -162,7 +186,9 @@ const EmployeeForm = ({
             <option value="O-">O-</option>
           </select>
 
-          <label>Contact:<span style={{color: "red"}}>*</span></label>
+          <label>
+            Contact:<span style={{ color: "red" }}>*</span>
+          </label>
           <input
             type="text"
             placeholder="Contact Number"
@@ -172,46 +198,56 @@ const EmployeeForm = ({
             required
           />
 
-          <label>Date Of Birth:<span style={{color: "red"}}>*</span></label>
+          <label>
+            Date Of Birth:<span style={{ color: "red" }}>*</span>
+          </label>
           <input
             type="date"
             name="date_of_birth"
             value={employee?.date_of_birth}
             onChange={handleInputChange}
-            style={{ width: "100%",
-                     height: "3.5vh",
-                     margin:"10px 0 10px 0 ",
-                     padding: "8px 12px",
-                     boxSizing: "border-box",
-                     fontSize: "16px"  
-                    }}
+            style={{
+              width: "100%",
+              height: "3.5vh",
+              margin: "10px 0 10px 0 ",
+              padding: "8px 12px",
+              boxSizing: "border-box",
+              fontSize: "16px",
+            }}
             required
           />
 
-          <label>Date Of Joining:<span style={{color: "red"}}>*</span></label>
+          <label>
+            Date Of Joining:<span style={{ color: "red" }}>*</span>
+          </label>
           <input
             type="date"
             name="date_of_joining"
             value={employee?.date_of_joining}
             onChange={handleInputChange}
-            style={{ width: "100%",
-                     height: "3.5vh",
-                     margin:"10px 0 10px 0 ",
-                     padding: "8px 12px",
-                     boxSizing: "border-box",
-                     fontSize: "16px" 
-                    }}
+            style={{
+              width: "100%",
+              height: "3.5vh",
+              margin: "10px 0 10px 0 ",
+              padding: "8px 12px",
+              boxSizing: "border-box",
+              fontSize: "16px",
+            }}
             required
           />
 
-          <label>Address:<span style={{color: "red"}}>*</span></label>
-          <textarea 
-            rows = '5' 
-            cols = '42' 
-            name = 'address' 
-            style={{fontSize: '16px',resize: "none"}}
-            value = {employee?.address} 
-            onChange={handleInputChange} required></textarea>
+          <label>
+            Address:<span style={{ color: "red" }}>*</span>
+          </label>
+          <textarea
+            rows="5"
+            cols="47"
+            name="address"
+            style={{ fontSize: "16px", resize: "none" }}
+            value={employee?.address}
+            onChange={handleInputChange}
+            required
+          ></textarea>
 
           <div className="--my">
             <button type="submit" className="--btn --btn-primary">

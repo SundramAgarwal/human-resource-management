@@ -1,33 +1,36 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const today = new Date();
-const options = { 
-  timeZone: 'Asia/Kolkata',
+const options = {
+  timeZone: "Asia/Kolkata",
   day: "numeric",
   month: "short",
-  year: "numeric"
+  year: "numeric",
 };
 const date = today.toLocaleDateString("en-IN", options);
 
-const attendanceSchema = new mongoose.Schema({
-  employeeId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Employee',
-    required: true
+const attendanceSchema = new mongoose.Schema(
+  {
+    employeeId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Employee",
+      required: true,
+    },
+    date: {
+      type: Date,
+      required: true,
+      default: date,
+    },
+    isPresent: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
-  date: {
-    type: Date,
-    required: true,
-    default: date
-  },
-  isPresent: {
-    type: Boolean,
-    required: true,
-    default: false
+  {
+    timestamps: true,
   }
-},{
-  timestamps: true,
-});
+);
 
-const Attendance = mongoose.model('Attendance', attendanceSchema);
+const Attendance = mongoose.model("Attendance", attendanceSchema);
 
 module.exports = Attendance;
