@@ -13,7 +13,7 @@ const sideBarMenu = [
         icon: <BiImageAdd/>,
         path: "/employee-edit-profile",
     },
-    {
+    { 
         title: "Leave",
         icon: <RxTimer/>,
         childrens: [
