@@ -17,7 +17,7 @@ const sideBarMenu = [
         title: "Leave",
         icon: <RxTimer/>,
         childrens: [
-            {
+            { 
                 title: "Apply for leave",
                 path: "/leave-form",
             },
