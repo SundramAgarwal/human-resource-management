@@ -51,8 +51,8 @@ const sideBarMenu = [
                 path: "/leave-applications",
             },
             {
-                title: "Applied Applications",
-                path: "/applied-applications",
+                title: "All Applications",
+                path: "/all-applications",
             },
         ],
     },

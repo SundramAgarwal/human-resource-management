@@ -66,7 +66,7 @@ const AddEmployee = () => {
     const ageDate = new Date(ageDiffMs);
     const age = Math.abs(ageDate.getUTCFullYear() - 1970);
 
-    return age >= 22;
+    return age >= 18;
   };
 
   const validateDateOfJoining = (doj) => {

@@ -193,7 +193,7 @@ const EmployeeForm2 = ({ employee, handleInputChange, saveEmployee }) => {
           <label>Address:</label>
           <textarea
             rows="5"
-            cols="47"
+            cols="42"
             name="address"
             style={{ fontSize: "16px", resize: "none" }}
             value={employee?.address || ""}

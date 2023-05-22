@@ -2,20 +2,16 @@ import React, { useEffect, useState } from "react";
 import "./EmployeeProfile.scss";
 import "./EmployeeForm.scss";
 import "./LeaveStatus.css";
-import Search from "../../../components/search/Search";
-import { SpinnerImg } from "../../../components/loader/Loader";
-import useRedirectLoggedOutAdmin from "../../../customHook/useRedirectLoggedOutAdmin";
-import { selectIsLoggedIn } from "../../../redux/features/auth/authSlice";
-import { getEmployee } from "../../../redux/features/employee/employeeSlice";
-import { useParams } from "react-router-dom";
-
+import Search from "../../components/search/Search";
+import { SpinnerImg } from "../../components/loader/Loader";
+import useRedirectLoggedOutEmployee from "../../customHook/useRedirectLoggedOutEmployee";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API_URL = `${BACKEND_URL}/api/leaveApplications`;
 
-const getLeaveApplicationByEmployeeId = async (id) => {
-  const response = await axios.get(`${API_URL}/leaves/${id}`);
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API_URL = `${BACKEND_URL}/api/leaveApplications/leaves`;
+
+const getLeaveByEmployee = async () => {
+  const response = await axios.get(API_URL);
   return response.data;
 };
 
@@ -34,40 +30,31 @@ const getLeaveStatusColor = (status) => {
   }
 };
 
-const EmployeeAllApplications = () => {
-  useRedirectLoggedOutAdmin("/login");
+const EmployeeAllLeaves = () => {
+  useRedirectLoggedOutEmployee("/employeelogin");
 
   const [totalLeaves, setTotalLeaves] = useState(0);
   const [approvedLeaves, setApprovedLeaves] = useState(0);
   const [rejectedLeaves, setRejectedLeaves] = useState(0);
   const [expiredLeaves, setExpiredLeaves] = useState(0);
+
   const [allLeaves, setAllLeaves] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const dispatch = useDispatch();
-  const { id } = useParams();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const { employee, isLoading, isError, message } = useSelector(
-    (state) => state.employee
-  );
 
   useEffect(() => {
-    if (isLoggedIn === true) {
-      dispatch(getEmployee(id));
-    }
-    if (isError) {
-      console.log(message);
-    }
-    const getAllLeaves = async (id) => {
+    const getAllLeaves = async () => {
       try {
-        const response = await getLeaveApplicationByEmployeeId(id);
+        const response = await getLeaveByEmployee();
         setAllLeaves(response.data);
         setTotalLeaves(response.data.length);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
     };
-    getAllLeaves(id);
-  }, [isLoggedIn, isError, message, dispatch, id]);
+    getAllLeaves();
+  }, []);
 
   const filteredLeaveRecords = allLeaves
     .filter((record) => {
@@ -108,31 +95,28 @@ const EmployeeAllApplications = () => {
     <div className="profile --my2">
       <div className="--flex-between --flex-dir-column">
         <span>
-          <h1>
-            All Leaves by: {employee.first_name} {employee.last_name}
-          </h1>
-          <h2>Total Leaves: {totalLeaves}</h2>
-          <h4
+          <h1>Total Leaves: {totalLeaves}</h1>
+          <h3
             style={{
               color: "green",
             }}
           >
             Approved Leaves: {approvedLeaves}
-          </h4>
-          <h4
+          </h3>
+          <h3
             style={{
               color: "red",
             }}
           >
             Rejected Leaves: {rejectedLeaves}
-          </h4>
-          <h4
+          </h3>
+          <h3
             style={{
               color: "gray",
             }}
           >
             Expired Leaves: {expiredLeaves}
-          </h4>
+          </h3>
         </span>
         <span>
           <Search value={search} onChange={(e) => setSearch(e.target.value)} />
@@ -198,4 +182,4 @@ const EmployeeAllApplications = () => {
   );
 };
 
-export default EmployeeAllApplications;
+export default EmployeeAllLeaves;

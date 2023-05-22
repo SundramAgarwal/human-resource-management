@@ -1,0 +1,51 @@
+.--btn.--blue {
+    background-color: blue;
+    color: white;
+  }
+  
+  .--btn.--rounded {
+    border-radius: 5px;
+    width: 140px;
+    margin-left: 19px;
+  }
+
+  .Card_card__z8HfQ.card {
+    width: 50rem;
+  }
+  b {
+    margin-left: 18px;
+  }
+
+  .status.approved {
+    color: green;
+    font-weight: 800;
+    text-transform: capitalize;
+  }
+  
+  .status.rejected {
+    color: red;
+    font-weight: 800;
+    text-transform: capitalize;
+  }
+  
+  .status.pending {
+    color: red;
+    font-weight: 800;
+    text-transform: capitalize;
+  }
+  
+  .status.expired {
+    color: gray;
+    font-weight: 800;
+    text-transform: capitalize;
+  }
+
+  .status.pending-blink {
+    animation: blinker 1s linear infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }

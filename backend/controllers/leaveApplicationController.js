@@ -5,11 +5,13 @@ const Employee = require("../models/employeeModel");
 
 //apply for leave
 const createLeave = asyncHandler(async (req, res) => {
-  const { startDate, endDate, reason } = req.body;
+  const { startDate, endDate, type, reason } = req.body;
   const adminId = req.employee.admin;
   const employeeId = req.employee.id; //is jagha hum jo employee id hai vo employeeprotect se mil rahi hai jo token se employee id nikal raha hai
   try {
     const currentDateTime = new Date().toISOString();
+
+    // Update status of pending leave applications whose end date has passed
     const expiredLeaves = await LeaveApplication.updateMany(
       {
         employeeId,
@@ -18,16 +20,29 @@ const createLeave = asyncHandler(async (req, res) => {
       },
       { status: "expired" }
     );
-
     console.log(
       `Number of expired leaves set to 'expired': ${expiredLeaves.nModified}`
     );
 
+    // Update status of any existing pending leave applications for this employee to 'expired'
+    const existingLeaves = await LeaveApplication.updateMany(
+      {
+        employeeId,
+        status: "pending",
+      },
+      { status: "expired" }
+    );
+    console.log(
+      `Number of existing leaves set to 'expired': ${existingLeaves.nModified}`
+    );
+
+    // Create new leave application
     const leaveApplication = await LeaveApplication.create({
       employeeId,
       adminId,
       startDate,
       endDate,
+      type,
       reason,
     });
     return res.status(201).json({ leaveApplication });
@@ -37,7 +52,7 @@ const createLeave = asyncHandler(async (req, res) => {
   }
 });
 
-const deleteLeave = asyncHandler(async(req, res) => {
+const deleteLeave = asyncHandler(async (req, res) => {
   const employeeId = req.employee.id;
   const leaveId = req.params.id;
 
@@ -47,15 +62,14 @@ const deleteLeave = asyncHandler(async(req, res) => {
       _id: leaveId,
       employeeId: employeeId,
     });
-
     if (!leaveApplication) {
       res.status(404);
       throw new Error("Leave application not found.");
     }
-
     if (leaveApplication.status === "pending") {
       // Delete the leave application if its status is pending
-      await leaveApplication.remove();
+      await LeaveApplication.deleteOne({ _id: req.params.id });
+      // await leaveApplication.remove();
       res.status(200).json({
         success: true,
         message: "Leave application removed successfully.",
@@ -67,6 +81,47 @@ const deleteLeave = asyncHandler(async(req, res) => {
         "This leave application cannot be removed as it has already been processed."
       );
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+});
+
+// get last leave applied by employee
+const getLastLeave = asyncHandler(async (req, res) => {
+  const employeeId = req.employee.id;
+  try {
+    // Find the last leave application for the employee
+    const lastLeaveApplication = await LeaveApplication.findOne({
+      employeeId: employeeId,
+    })
+      .sort({ createdAt: -1 })
+      .limit(1);
+
+    if (!lastLeaveApplication) {
+      res.status(404);
+      throw new Error("Leave application not found.");
+    }
+    // Check if the status of the last leave application is "pending" and its start date is less than the current date
+    const currentDateTime = new Date().toISOString();
+    if (
+      lastLeaveApplication.status === "pending" &&
+      lastLeaveApplication.startDate < currentDateTime
+    ) {
+      // Update the status of the last leave application to "expired"
+      lastLeaveApplication.status = "expired";
+      await lastLeaveApplication.save();
+      console.log(
+        `Leave application ${lastLeaveApplication._id} set to 'expired'.`
+      );
+    }
+    res.status(200).json({
+      success: true,
+      data: lastLeaveApplication,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -127,9 +182,9 @@ const getAllPendingLeaveApplications = asyncHandler(
       }
     );
 
-    console.log(
-      `Number of expired leaves set to 'expired': ${LeaveApplicationRecords.nModified}`
-    );
+    // console.log(
+    //   `Number of expired leaves set to 'expired': ${LeaveApplicationRecords.nModified}`
+    // );
 
     const pendingLeaveApplications = await LeaveApplication.find({
       adminId: adminId,
@@ -151,7 +206,6 @@ const getAllLeaveApplicationsByAdmin = asyncHandler(async (req, res) => {
   try {
     // Get all employees under the admin
     const employees = await Employee.find({ admin: adminId });
-    console.log(employees);
 
     // Collect all pending leave applications from each employee
     const leaveApplications = [];
@@ -162,7 +216,21 @@ const getAllLeaveApplicationsByAdmin = asyncHandler(async (req, res) => {
         employeeId
       );
       if (pendingLeaveApplications.length > 0) {
-        leaveApplications.push(pendingLeaveApplications[0]);
+        // populate the employee details based on the employeeId field
+        const populatedApplication = await LeaveApplication.findOne({
+          _id: pendingLeaveApplications[0]._id,
+        }).populate({
+          path: "employeeId",
+          select: [
+            "first_name",
+            "last_name",
+            "department",
+            "role",
+            "designation",
+            "email",
+          ],
+        });
+        leaveApplications.push(populatedApplication);
       }
     }
 
@@ -171,7 +239,7 @@ const getAllLeaveApplicationsByAdmin = asyncHandler(async (req, res) => {
       data: leaveApplications,
     });
   } catch (error) {
-    console.error(err);
+    console.error(error);
     res.status(500).json({
       success: false,
       message: "Server error",
@@ -182,31 +250,30 @@ const getAllLeaveApplicationsByAdmin = asyncHandler(async (req, res) => {
 // update a specific leave application for an employee
 const updateLeaveApplication = asyncHandler(async (req, res) => {
   const { status } = req.body;
-  const employeeId = req.params.id;
-  const admin_mail_Id = req.admin.email;
+  const leaveId = req.params.id;
+  const admin_mail_Id = process.env.EMAIL_ADMIN;
 
   try {
-    // Find the latest pending leave application for the employee
-    const latestPendingLeaveApplication = await LeaveApplication.findOne({
-      employeeId,
-      status: "pending",
-    })
-      .sort({ createdAt: -1 })
-      .limit(1);
+    // Find the leave application to be updated
+    const leaveApplication = await LeaveApplication.findOne({
+      _id: leaveId,
+      // status: "pending",
+    });
+
+    if (!leaveApplication) {
+      res.status(404);
+      throw new Error("Pending leave application not found!");
+    }
 
     // Update the leave application with the given status
-    console.log(latestPendingLeaveApplication);
-    if (latestPendingLeaveApplication) {
-      latestPendingLeaveApplication.status = status;
-      await latestPendingLeaveApplication.save();
-      console.log(latestPendingLeaveApplication);
-      // Send email notification to the employee
-      const employee = await Employee.findById(employeeId);
-      const subject =
-        status === "approved"
-          ? "Leave Application Approved"
-          : "Leave Application Rejected";
-      const message = `Dear ${employee.name},\n\nYour leave application from ${latestPendingLeaveApplication.startDate} to ${latestPendingLeaveApplication.endDate} has been ${status} by your admin.\n\nBest regards,\nThe HR Team`;
+    leaveApplication.status = status;
+    await leaveApplication.save();
+
+    // Send email notification to the employee only if status is approved
+    if (status === "approved") {
+      const employee = await Employee.findById(leaveApplication.employeeId);
+      const subject = "Leave Application Approved";
+      const message = `Dear ${employee.first_name},\n\nYour leave application from ${leaveApplication.startDate} to ${leaveApplication.endDate} has been approved by your admin.\n\nBest regards,\nThe HR Team`;
       const send_to = employee.email;
       const sent_from = admin_mail_Id;
       try {
@@ -215,15 +282,26 @@ const updateLeaveApplication = asyncHandler(async (req, res) => {
         res.status(500);
         throw new Error("Email not sent please try again");
       }
-
-      res.status(200).json({
-        success: true,
-        message: `Leave application ${status}.`,
-      });
-    } else {
-      res.status(400);
-      throw new Error("Pending leave application not found!");
     }
+
+    if (status === "rejected") {
+      const employee = await Employee.findById(leaveApplication.employeeId);
+      const subject = "Leave Application Rejected";
+      const message = `Dear ${employee.first_name},\n\nYour leave application from ${leaveApplication.startDate} to ${leaveApplication.endDate} has been Rejected by your admin.For more information please contact to the HR team of your organization.\n\nBest regards,\nThe HR Team`;
+      const send_to = employee.email;
+      const sent_from = admin_mail_Id;
+      try {
+        await sendEmail(subject, message, send_to, sent_from);
+      } catch (error) {
+        res.status(500);
+        throw new Error("Email not sent please try again");
+      }
+    }
+
+    res.status(200).json({
+      success: true,
+      message: `Leave application ${status}.`,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -236,6 +314,7 @@ const updateLeaveApplication = asyncHandler(async (req, res) => {
 module.exports = {
   createLeave,
   deleteLeave,
+  getLastLeave,
   getLeaveByEmployee,
   getLeaveApplicationByEmployeeId,
   getAllLeaveApplicationsByAdmin,

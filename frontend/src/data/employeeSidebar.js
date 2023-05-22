@@ -23,7 +23,11 @@ const sideBarMenu = [
             },
             {
                 title: "Leave Status",
-                path: "/view-leave",
+                path: "/leave-status",
+            },
+            {
+                title: "All Leaves",
+                path: "/all-leave",
             },
         ],
     },

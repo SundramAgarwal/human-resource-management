@@ -11,19 +11,15 @@ import {
   // updateEmployee,
 } from "../../redux/features/employee/employeeSlice";
 
-
-
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API_URL = `${BACKEND_URL}/api/employees/`;
 
-const updateEmployee = async (id,formData) => {
-  const response = await axios.patch(`${API_URL}${id}`,formData);
+const updateEmployee = async (id, formData) => {
+  const response = await axios.patch(`${API_URL}${id}`, formData);
   return response.data;
 };
-
-
 
 const EditEmployee = () => {
   const { id } = useParams();
@@ -41,15 +37,13 @@ const EditEmployee = () => {
 
   useEffect(() => {
     setEmployee(employeeEdit);
-
   }, [employeeEdit]);
- 
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEmployee({ ...employee, [name]: value });
   };
 
- 
   const saveEmployee = async (e) => {
     e.preventDefault();
     // console.log("employee data is ",employee)
@@ -62,8 +56,8 @@ const EditEmployee = () => {
     console.log(...formData);
 
     // const data = await dispatch(updateEmployee({ id, employee}));
-        const data = await updateEmployee(id,employee)
-        console.log(data)
+    const data = await updateEmployee(id, employee);
+    console.log(data);
     await dispatch(getEmployees());
     navigate("/dashboard");
   };

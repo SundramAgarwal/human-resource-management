@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
-import { BrowserRouter,Routes,Route} from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Reset from "./pages/authentication/Reset";
 import EmployeeReset from "./pages/employeeAuthentication/EmployeeReset";
@@ -10,76 +10,91 @@ import EmployeeForgot from "./pages/employeeAuthentication/EmployeeForgot";
 import Login from "./pages/authentication/Login";
 import EmployeeLogin from "./pages/employeeAuthentication/EmployeeLogin";
 import Register from "./pages/authentication/Register";
-import Dashboard from './pages/dashboard/Dashboard';
-import EmployeeDashboard from './pages/dashboard/EmployeeDashboard';
-import MarkAttendance from './pages/Attendance/MarkAttendance';
-import ViewAttendance from './pages/Attendance/ViewAttendance';
-import Sidebar from './components/sidebar/Sidebar';
-import EmployeeSidebar from './components/sidebar/EmployeeSidebar';
-import Layout from './components/layout/Layout';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch } from 'react-redux';
-import axios from 'axios';
-import { getLoginStatus } from './services/authService';
-import { SET_LOGIN } from './redux/features/auth/authSlice';
+import Dashboard from "./pages/dashboard/Dashboard";
+import EmployeeDashboard from "./pages/dashboard/EmployeeDashboard";
+import MarkAttendance from "./pages/Attendance/MarkAttendance";
+import ViewAttendance from "./pages/Attendance/ViewAttendance";
+import Sidebar from "./components/sidebar/Sidebar";
+import EmployeeSidebar from "./components/sidebar/EmployeeSidebar";
+import Layout from "./components/layout/Layout";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { getLoginStatus } from "./services/authService";
+import { SET_LOGIN } from "./redux/features/auth/authSlice";
 import AddEmployee from "./pages/addEmployee/AddEmployee";
-import EmployeeDetail from './components/employee/employeeDetail/EmployeeDetail';
-import Profile from './pages/profile/Profile';
-import EditEmployee from './pages/editEmployee/EditEmployee';
-import EditProfile from './pages/profile/EditProfile';
-import EmployeeEditProfile from './pages/profile/EmployeeEditProfile'
-import Contact from './pages/contact/Contact';
-import LeaveApplications from "./pages/leaveApplication/LeaveApplications"
-import AppliedApplications from "./pages/leaveApplication/AppliedApplications"
-import EmployeeAttendance from './components/employee/employeeAttendance/EmployeeAttendance';
-import EmployeeAllApplications from './components/employee/employeeApplication/EmployeeAllApplications'
-import { ShowWhenEmployeeIsLoggedInAndAdminIsLoggedOut, ShowWhenEmployeeIsLoggedOutAndAdminIsLoggedIn } from './components/protect/HiddenLink';
+import EmployeeDetail from "./components/employee/employeeDetail/EmployeeDetail";
+import Profile from "./pages/profile/Profile";
+import EditEmployee from "./pages/editEmployee/EditEmployee";
+import EditProfile from "./pages/profile/EditProfile";
+import EmployeeEditProfile from "./pages/profile/EmployeeEditProfile";
+import Contact from "./pages/contact/Contact";
+import LeaveApplications from "./pages/leaveApplication/adminLeaveManagement/LeaveApplications";
+import AllApplications from "./pages/leaveApplication/adminLeaveManagement/AllApplications";
+import EmployeeAttendance from "./components/employee/employeeAttendance/EmployeeAttendance";
+import EmployeeAllApplications from "./components/employee/employeeApplication/EmployeeAllApplications";
+import {
+  ShowWhenEmployeeIsLoggedInAndAdminIsLoggedOut,
+  ShowWhenEmployeeIsLoggedOutAndAdminIsLoggedIn,
+} from "./components/protect/HiddenLink";
+import LeaveForm from "./pages/leaveApplication/LeaveForm";
+import LeaveStatus from "./pages/leaveApplication/LeaveStatus"
+import EmployeeAllLeaves from "./pages/leaveApplication/EmployeeAllLeaves"
 
 axios.defaults.withCredentials = true;
 
 function App() {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     async function loginStatus() {
-      const status = await getLoginStatus()
-      dispatch(SET_LOGIN(status))
+      const status = await getLoginStatus();
+      dispatch(SET_LOGIN(status));
       // here status is passing as a payload
     }
-    loginStatus()
-  }, [dispatch])
-  
+    loginStatus();
+  }, [dispatch]);
+
   return (
     // browser router surrounds all our routes
-    <BrowserRouter>  
-    <ToastContainer/>
+    <BrowserRouter>
+      <ToastContainer />
       <Routes>
-        <Route path = "/" element = {<Home/>} />
-        <Route path = "/login" element = {<Login/>} />
-        <Route path = "/employeelogin" element = {<EmployeeLogin/>} />
-        <Route path = "/register" element = {<Register/>} />
-        <Route path = "/forgot" element = {<Forgot/>} />
-        <Route path = "/employeeforgot" element = {<EmployeeForgot/>} />
-        <Route path = "/resetpassword/:resetToken" element = {<Reset/>} />
-        <Route path = "/employeeresetpassword/:resetToken" element = {<EmployeeReset/>} />
-        <Route path = "/dashboard" element = {
-          <Sidebar>
-            <Layout>
-              <Dashboard/>
-            </Layout>
-          </Sidebar>
-        } />
-        <Route path = "/employeedashboard" element = {
-          <EmployeeSidebar>
-            <Layout>
-              <EmployeeDashboard/>
-            </Layout>
-          </EmployeeSidebar>
-        } />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/employeelogin" element={<EmployeeLogin />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot" element={<Forgot />} />
+        <Route path="/employeeforgot" element={<EmployeeForgot />} />
+        <Route path="/resetpassword/:resetToken" element={<Reset />} />
         <Route
-          path="/add-employee" element={
+          path="/employeeresetpassword/:resetToken"
+          element={<EmployeeReset />}
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <Sidebar>
+              <Layout>
+                <Dashboard />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/employeedashboard"
+          element={
+            <EmployeeSidebar>
+              <Layout>
+                <EmployeeDashboard />
+              </Layout>
+            </EmployeeSidebar>
+          }
+        />
+        <Route
+          path="/add-employee"
+          element={
             <Sidebar>
               <Layout>
                 <AddEmployee />
@@ -88,7 +103,8 @@ function App() {
           }
         />
         <Route
-          path="/employee-detail/:id" element={
+          path="/employee-detail/:id"
+          element={
             <Sidebar>
               <Layout>
                 <EmployeeDetail />
@@ -97,7 +113,8 @@ function App() {
           }
         />
         <Route
-          path="/edit-employee/:id" element={
+          path="/edit-employee/:id"
+          element={
             <Sidebar>
               <Layout>
                 <EditEmployee />
@@ -106,7 +123,8 @@ function App() {
           }
         />
         <Route
-          path="/profile" element={
+          path="/profile"
+          element={
             <Sidebar>
               <Layout>
                 <Profile />
@@ -115,7 +133,8 @@ function App() {
           }
         />
         <Route
-          path="/edit-profile" element={
+          path="/edit-profile"
+          element={
             <Sidebar>
               <Layout>
                 <EditProfile />
@@ -124,7 +143,8 @@ function App() {
           }
         />
         <Route
-          path="/employee-edit-profile" element={
+          path="/employee-edit-profile"
+          element={
             <EmployeeSidebar>
               <Layout>
                 <EmployeeEditProfile />
@@ -133,7 +153,8 @@ function App() {
           }
         />
         <Route
-          path="/contact-us" element={
+          path="/contact-us"
+          element={
             <>
               <ShowWhenEmployeeIsLoggedOutAndAdminIsLoggedIn>
                 <Sidebar>
@@ -154,7 +175,8 @@ function App() {
           }
         />
         <Route
-          path="/mark-attendance" element={
+          path="/mark-attendance"
+          element={
             <Sidebar>
               <Layout>
                 <MarkAttendance />
@@ -163,7 +185,8 @@ function App() {
           }
         />
         <Route
-          path="/view-attendance" element={
+          path="/view-attendance"
+          element={
             <Sidebar>
               <Layout>
                 <ViewAttendance />
@@ -172,7 +195,8 @@ function App() {
           }
         />
         <Route
-          path="/employee-attendance/:id" element={
+          path="/employee-attendance/:id"
+          element={
             <Sidebar>
               <Layout>
                 <EmployeeAttendance />
@@ -181,7 +205,8 @@ function App() {
           }
         />
         <Route
-          path="/leave-applications" element={
+          path="/leave-applications"
+          element={
             <Sidebar>
               <Layout>
                 <LeaveApplications />
@@ -190,16 +215,18 @@ function App() {
           }
         />
         <Route
-          path="/applied-applications" element={
+          path="/all-applications"
+          element={
             <Sidebar>
               <Layout>
-                <AppliedApplications />
+                <AllApplications />
               </Layout>
             </Sidebar>
           }
         />
         <Route
-          path="/employee-all-applications/:id" element={
+          path="/employee-all-applications/:id" //use this getLeaveApplicationByEmployeeId
+          element={
             <Sidebar>
               <Layout>
                 <EmployeeAllApplications />
@@ -207,9 +234,41 @@ function App() {
             </Sidebar>
           }
         />
+        <Route
+          path="/leave-form"
+          element={
+            <EmployeeSidebar>
+              <Layout>
+                <LeaveForm />
+              </Layout>
+            </EmployeeSidebar>
+          }
+        />
+        <Route
+          path="/leave-status"
+          element={
+            <EmployeeSidebar>
+              <Layout>
+                <LeaveStatus />
+              </Layout>
+            </EmployeeSidebar>
+          }
+        />
+        {/* all-leave */}
+
+        <Route
+          path="/all-leave"
+          element={
+            <EmployeeSidebar>
+              <Layout>
+                <EmployeeAllLeaves />
+              </Layout>
+            </EmployeeSidebar>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
-};
+}
 
 export default App;

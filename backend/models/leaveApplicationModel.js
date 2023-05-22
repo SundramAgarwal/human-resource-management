@@ -21,6 +21,10 @@ const leaveApplicationSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+    type: {
+      type: String,
+      trim: true,
+    },
     reason: {
       type: String,
       trim: true,
